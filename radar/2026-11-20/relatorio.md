@@ -1,7 +1,7 @@
 # RADAR DE CRIATIVOS — 20/11/2026
 
 **10 referências** (2 por categoria), todas com link real retornado pela busca e **nenhuma repetida** das 79 já catalogadas (07 a 19/11).
-Arquivos: `referencias.json` (fichas completas), `galeria.html` (galeria visual), `catalogo/catalogo-central.csv` (agora 89 referências únicas).
+Galeria publicada: https://claude.ai/artifact/M8gwAEfpigpXLQ6Pcnnz7a (privada). Arquivos: `referencias.json` (fichas completas), `galeria.html` (galeria visual), `catalogo/catalogo-central.csv` (agora 89 referências únicas).
 
 ## Limitações desta execução
 - A rede da sessão continua bloqueando youtube.com, i.ytimg.com, vimeo.com, behance.net, tiktok.com e pexels.com (testado hoje). **Nenhum vídeo foi assistido.**
