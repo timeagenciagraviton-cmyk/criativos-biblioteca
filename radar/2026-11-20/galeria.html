@@ -1,0 +1,195 @@
+<title>Radar Graviton 20/11</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: mesa de edição — cabeçalho com régua de timecode, grade de cards com monitor 9:16 à esquerda e ficha técnica à direita */
+:root{
+  --bg:#F3F5F7; --panel:#FFFFFF; --ink:#16202A; --muted:#5B6773; --line:#D9DFE5;
+  --accent:#0B7A85; --accent-2:#C77A12; --screen:#1C2630; --screen-2:#2E3D4B; --on-screen:#F4F7FA;
+  --ok:#2F7D4F; --warn:#A8640A; --hard:#A33A3A;
+  --f-display:"Familjen Grotesk","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#10161C; --panel:#18212A; --ink:#E6ECF1; --muted:#97A4B0; --line:#2A3743;
+  --accent:#3CC0CC; --accent-2:#E6A24A; --screen:#0A0F14; --screen-2:#24313D; --on-screen:#F4F7FA;
+  --ok:#5BC189; --warn:#E6A24A; --hard:#E07B7B; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10161C; --panel:#18212A; --ink:#E6ECF1; --muted:#97A4B0; --line:#2A3743;
+  --accent:#3CC0CC; --accent-2:#E6A24A; --screen:#0A0F14; --screen-2:#24313D; --on-screen:#F4F7FA;
+  --ok:#5BC189; --warn:#E6A24A; --hard:#E07B7B; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-body)}
+.wrap{max-width:1180px;margin:0 auto;padding-block:32px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:36px}
+header{display:grid;gap:12px}
+.eyebrow{font:500 12px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font:700 clamp(30px,5vw,48px)/1.05 var(--f-display);margin:0;text-wrap:balance;letter-spacing:-.01em}
+h2{font:700 24px/1.2 var(--f-display);margin:0;text-wrap:balance}
+h3{font:700 18px/1.25 var(--f-display);margin:0;text-wrap:balance}
+.lede{max-width:68ch;color:var(--muted);margin:0}
+.ruler{height:22px;border-bottom:1px solid var(--line);background:repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px 12px) bottom/100% 8px no-repeat,repeating-linear-gradient(90deg,var(--muted) 0 1px,transparent 1px 120px) bottom/100% 16px no-repeat;position:relative;opacity:.8}
+.notice{border:1px solid var(--line);background:var(--panel);padding:14px 16px;border-radius:6px;max-width:80ch;font-size:14px;color:var(--muted)}
+.notice strong{color:var(--ink)}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.filters button{font:500 13px var(--f-body);border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:6px 12px;border-radius:999px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--panel)}
+.filters button:focus-visible,a:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,520px),1fr));gap:20px}
+.card{display:grid;grid-template-columns:150px 1fr;gap:18px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px}
+@media (max-width:460px){.card{grid-template-columns:1fr}.mon{max-width:180px}}
+.info{display:grid;gap:8px;align-content:start;min-width:0}
+.meta{display:flex;flex-wrap:wrap;gap:6px;font:500 11px/1 var(--f-mono);text-transform:uppercase;letter-spacing:.06em}
+.chip{padding:5px 8px;border-radius:4px;border:1px solid var(--line);color:var(--muted)}
+.chip.cat{color:var(--accent);border-color:currentColor}
+.chip.d-básico{color:var(--ok);border-color:currentColor}.chip.d-intermediário{color:var(--warn);border-color:currentColor}.chip.d-avançado{color:var(--hard);border-color:currentColor}
+.tec{font-weight:600;margin:0}
+dl{margin:0;display:grid;gap:6px;font-size:13.5px}
+dt{font:500 11px var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+dd{margin:0}
+a{color:var(--accent)}
+.src{font:500 12.5px var(--f-mono);word-break:break-all}
+.num{font:500 12px var(--f-mono);color:var(--muted)}
+/* monitor 9:16 */
+.mon{position:relative;aspect-ratio:9/16;align-self:start;max-width:100%;background:var(--screen);border-radius:10px;overflow:hidden;color:var(--on-screen);font-family:var(--f-display)}
+.mon .tag{position:absolute;left:6px;bottom:6px;font:500 9px var(--f-mono);letter-spacing:.06em;opacity:.7;z-index:9}
+.l{position:absolute}
+.fig{left:30%;right:30%;bottom:0;height:52%;background:var(--screen-2);border-radius:40% 40% 0 0}
+.fig::before{content:"";position:absolute;left:28%;right:28%;top:-34%;aspect-ratio:1;border-radius:50%;background:var(--screen-2)}
+.room{inset:0;background:linear-gradient(180deg,#6F8796 0 55%,#B59877 55% 100%)}
+.room2{inset:0;background:linear-gradient(180deg,#D9CBB4 0 58%,#7A5A43 58% 100%)}
+.cap{left:8%;right:8%;bottom:24%;text-align:center;font-weight:700;font-size:17px;text-transform:uppercase}
+/* 1 editorial */
+.ed span{position:absolute;inset:0;opacity:0;font-family:Georgia,serif;font-weight:400;text-transform:none;font-size:19px;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.6);animation:ed 4s infinite}
+.ed span:nth-child(2){animation-delay:2s}.ed i{color:var(--accent-2)}
+@keyframes ed{0%{opacity:0;transform:translateY(14px);filter:blur(5px)}10%,42%{opacity:1;transform:none;filter:none}50%,100%{opacity:0}}
+/* 2 realtor */
+.rt{top:22%;bottom:auto;font-size:20px;-webkit-text-stroke:.6px #111}
+.rt b{animation:rt 2s infinite;display:inline-block}.rt b+b{animation-delay:1s}
+@keyframes rt{0%,49%{color:var(--accent-2);transform:scale(1.12)}50%,100%{color:var(--on-screen);transform:none}}
+/* 3 grid */
+.gr{inset:6%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:4px}
+.gr i{background:var(--screen-2);border-radius:3px;opacity:0;animation:gi 4.5s infinite}
+.gr i:nth-child(3n+1){background:#7E95A3}.gr i:nth-child(3n+2){background:#B59877}
+@keyframes gi{0%{opacity:0;transform:scale(.6)}8%,85%{opacity:1;transform:none}95%,100%{opacity:0}}
+/* 4 asym */
+.as{inset:4%;display:grid;grid-template-columns:3fr 2fr;grid-template-rows:1fr 1fr;gap:4px}
+.as div{position:relative;border-radius:4px;overflow:hidden;animation:asi 4s infinite both}
+.as div:first-child{grid-row:span 2;background:var(--screen-2)}.as div:nth-child(2){background:#7E95A3;animation-delay:.3s}.as div:nth-child(3){background:#B59877;animation-delay:.6s}
+@keyframes asi{0%{transform:translateY(110%)}15%,85%{transform:none}100%{transform:translateY(-110%)}}
+/* 5 TV */
+.tv{left:22%;right:22%;top:30%;height:20%;background:#111;border:3px solid #333;animation:tv 3.6s infinite;overflow:hidden}
+@keyframes tv{0%,30%{left:22%;right:22%;top:30%;height:20%}70%,100%{left:-2%;right:-2%;top:-2%;height:104%}}
+.scr{inset:0;transform:scale(1.4);animation:scr 3.6s infinite}
+@keyframes scr{0%,30%{transform:scale(1.4)}70%,100%{transform:none}}
+/* 6 ramp */
+.rp{inset:0;background:repeating-linear-gradient(90deg,#6F8796 0 30px,#B59877 30px 60px);animation:rp 3s infinite}
+@keyframes rp{0%{background-position:0}40%{background-position:20px}55%{background-position:260px;filter:blur(3px)}65%{background-position:300px;filter:none}100%{background-position:340px}}
+.gauge{left:8%;right:8%;bottom:8%;height:26px;z-index:6}
+/* 7 collage */
+.ph{width:46%;aspect-ratio:4/5;background:#E9E2D6;padding:4px;box-shadow:0 6px 14px rgba(0,0,0,.45);opacity:0;animation:ph 5s infinite}
+.ph::after{content:"";display:block;height:100%;background:#7E95A3}
+.ph.b::after{background:#B59877}.ph.c::after{background:#5F6E62}
+.ph.a{left:8%;top:12%;--r:-6deg}.ph.b{right:8%;top:24%;--r:5deg;animation-delay:.25s}.ph.c{left:24%;top:46%;--r:-2deg;animation-delay:.5s}
+@keyframes ph{0%{opacity:0;transform:rotate(var(--r)) translateY(-20%) scale(1.15)}10%,85%{opacity:1;transform:rotate(var(--r))}100%{opacity:0}}
+/* 8 cutaway */
+.cw{inset:0;opacity:0;animation:cw 3s steps(1) infinite}
+@keyframes cw{0%,39%{opacity:0}40%,79%{opacity:1}80%{opacity:0}}
+.cutmk{left:6%;right:6%;bottom:6%;height:10px;z-index:6;background:linear-gradient(90deg,var(--on-screen) 0 40%,var(--accent-2) 40% 80%,var(--on-screen) 80%);opacity:.8}
+/* 9 tour */
+.hd{inset:0;animation:hd 4s infinite}
+@keyframes hd{0%,30%{transform:scale(1.25) translateX(-6%)}35%,100%{transform:scale(1)}}
+.tr{inset:0;opacity:0;animation:tr 4s infinite}
+@keyframes tr{0%,40%{opacity:0;background-position:0}42%{opacity:1}90%{opacity:1;background-position:200px}100%{opacity:0}}
+/* 10 reel */
+.flash{inset:0;opacity:0;animation:fl 2.4s steps(1) infinite}
+.flash.f2{animation-delay:.8s}.flash.f3{animation-delay:1.6s}
+@keyframes fl{0%,33%{opacity:1}34%,100%{opacity:0}}
+.top3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.spec{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:8px;align-content:start}
+.spec p{margin:0;font-size:14px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+.tbl{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:8px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 11px var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+.pr{font:600 12px var(--f-mono);text-transform:uppercase}
+.pr.alta{color:var(--hard)}.pr.media{color:var(--warn)}.pr.baixa{color:var(--muted)}
+footer{font-size:13px;color:var(--muted);max-width:80ch}
+@media (prefers-reduced-motion:reduce){.mon *{animation:none!important}}
+</style>
+<div class="wrap">
+<header>
+  <span class="eyebrow">Radar de criativos · 20 nov 2026 · 10 referências</span>
+  <h1>Radar Graviton — 20/11</h1>
+  <div class="ruler" aria-hidden="true"></div>
+  <p class="lede">Dez técnicas de edição para o Graviton Video Editor, duas por categoria. Hoje o foco foi imóveis e interiores (transições, rampas, legendas de tour) e formas novas de mostrar fotos de resultados. Nenhuma repete as 79 referências já catalogadas.</p>
+  <div class="notice"><strong>Como ler as prévias:</strong> cada monitor 9:16 é uma animação esquemática feita por nós para ilustrar o efeito. Não é a miniatura do vídeo original: a rede desta execução bloqueou YouTube, TikTok, Vimeo e Behance, então nenhum vídeo foi assistido. "Observado" vem só do título e do resumo da busca. Técnica, momento e criador não foram verificados. Nenhum dado de desempenho é afirmado.</div>
+</header>
+<section aria-labelledby="g"><div style="display:grid;gap:14px">
+  <h2 id="g">Galeria</h2>
+  <div class="filters" role="group" aria-label="Filtrar por categoria" id="filters"></div>
+  <div class="grid" id="grid"></div>
+</div></section>
+<section aria-labelledby="t3" style="display:grid;gap:14px">
+  <h2 id="t3">Top 3 do dia</h2>
+  <div class="top3">
+    <article class="spec"><span class="num">Ref. 06 · Animações</span><h3>Rampa de velocidade</h3>
+      <p><b>Resultado:</b> o clipe desacelera, dispara no corte e chega ao próximo plano em velocidade normal. O tour fica rápido sem parecer corrido.</p>
+      <p><b>Parâmetros:</b> preset de curva (suave, agressiva, entrada, saída), velocidade mínima (25–80%), pico (200–1000%), duração do pico (4–15 frames), motion blur (0–100%), alinhar pico ao beat.</p>
+      <p><b>Comportamento:</b> curva bezier contínua, sem degraus; o corte cai no pico; o áudio do clipe é silenciado e entra um whoosh opcional.</p>
+      <p><b>Tecnologia:</b> remapeamento de tempo com interpolação de quadros (optical flow ou frame blending), motion blur por acúmulo, detecção de beat na trilha.</p></article>
+    <article class="spec"><span class="num">Refs. 03–04 · Composição</span><h3>Mosaico de portfólio</h3>
+      <p><b>Resultado:</b> vários projetos, casos ou ângulos aparecem no mesmo quadro, montados célula a célula.</p>
+      <p><b>Parâmetros:</b> grade (2×2, 2×3, 3×3, assimétrica 1+2), gap 0–12px, cantos 0–16px, ordem de entrada (sequência, aleatória, diagonal), intervalo entre células (2–8 frames), célula em destaque que cresce até tela cheia.</p>
+      <p><b>Comportamento:</b> células entram com escala 60%→100% e fade; no fim, uma célula expande e vira o próximo plano.</p>
+      <p><b>Tecnologia:</b> compositor de camadas com crop em "cover" por célula; expansão por keyframes de posição e escala; zona segura 9:16.</p></article>
+    <article class="spec"><span class="num">Ref. 07 · Materiais complementares</span><h3>Mural de resultados</h3>
+      <p><b>Resultado:</b> fotos de obras, sorrisos ou casos caem como fotos impressas sobre uma superfície, enquanto a pessoa fala.</p>
+      <p><b>Parâmetros:</b> nº de fotos (2–8), borda (0–6%, cor), rotação aleatória (±0–10°), sombra, textura de fundo, intervalo (3–10 frames), drift da câmera (0–4%), legenda manuscrita opcional.</p>
+      <p><b>Comportamento:</b> cada foto entra com escala 115%→100% e pequena queda; o conjunto deriva lentamente; a saída pode ser um zoom numa das fotos.</p>
+      <p><b>Tecnologia:</b> camadas 2D com transformação e sombra; semente aleatória fixa para resultados repetíveis; reaproveita o motor do mosaico.</p></article>
+  </div>
+</section>
+<section aria-labelledby="imp" style="display:grid;gap:14px">
+  <h2 id="imp">O que vale implementar no editor</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Prioridade</th><th>Proposta</th><th>Motivo</th></tr></thead>
+    <tbody>
+      <tr><td class="pr alta">Alta</td><td>Esconder jump cuts com B-roll (ref. 08)</td><td>Encaixa na remoção de silêncio que já existe e serve a todo depoimento de clínica e serviço</td></tr>
+      <tr><td class="pr alta">Alta</td><td>Rampa de velocidade com presets (ref. 06)</td><td>Usada nos tours de imóvel; só precisa de remapeamento de tempo</td></tr>
+      <tr><td class="pr media">Média</td><td>Mosaico de portfólio (refs. 03–04)</td><td>Mostra vários projetos ou casos num quadro; base para o mural</td></tr>
+      <tr><td class="pr media">Média</td><td>Mural de resultados (ref. 07)</td><td>Dá movimento a fotos estáticas de antes/depois e de obras</td></tr>
+      <tr><td class="pr media">Média</td><td>Preset de legenda "Editorial premium" (ref. 01)</td><td>Alternativa discreta ao karaokê colorido para alto padrão e estética</td></tr>
+      <tr><td class="pr baixa">Baixa</td><td>Transição "Entrar na tela" com 4 pontos (ref. 05)</td><td>Visual forte, mas precisa de rastreamento de cantos para ficar bom</td></tr>
+      <tr><td class="pr baixa">Baixa</td><td>Template "Tour com apresentador" (refs. 09–10)</td><td>Assistir aos dois vídeos antes de especificar</td></tr>
+    </tbody></table></div>
+</section>
+<footer>A busca na Meta Ads Library (BR, ativos, "reforma apartamento antes e depois", 246 resultados estimados) só devolve texto e o link de cada anúncio, sem o vídeo. Os leads estão no relatório do dia. Catálogo central: 89 referências únicas em <span class="src">catalogo/catalogo-central.csv</span>.</footer>
+</div>
+<script>
+const DATA=[{"categoria": "Legendas", "titulo": "Premiere Pro Captions That Make Edits Look Expensive (Full Tutorial)", "url": "https://www.youtube.com/watch?v=IITI8wU5HmA", "tecnica": "Legenda 'premium' animada sem plugins (estilo estético/editorial)", "observado": "Título e resumo da busca: estilo de legenda animada 'estético', feito só no Premiere Pro, sem plugins e sem configuração complexa.", "hipotese": "Tipografia fina ou serifada, caixa baixa, entrada suave por opacidade + leve deslocamento vertical/blur, poucas palavras por bloco, sem caixa de fundo.", "reproduzir": "Blocos de 2–4 palavras; entrada com opacidade 0→100%, deslocamento Y +12px→0 e desfoque 6px→0 em ~10 frames com ease-out; palavra-chave em itálico ou peso maior; sombra suave para leitura.", "dificuldade": "básico", "nichos": ["Arquitetura de alto padrão", "Estética facial e corporal", "Arquitetura e interiores"], "graviton": "Preset 'Editorial premium' no motor de legendas: fonte serifada + sans, entrada blur-rise, destaque por itálico em vez de cor."}, {"categoria": "Legendas", "titulo": "Viral Realtor Caption Reels in After Effects Step by Step Tutorial", "url": "https://www.youtube.com/watch?v=KtvnhD9OQ0M", "tecnica": "Legendas de Reels de corretor/imobiliário feitas do zero no After Effects", "observado": "Título e resumo: passo a passo de legendas no estilo dos Reels virais de corretores de imóveis, construídas do zero no After Effects.", "hipotese": "Legendas centrais grandes por palavra/frase curta sobre tour do imóvel, com destaque de cor na palavra ativa e animação de escala.", "reproduzir": "Assistir e registrar fonte, tamanho, posição (zona segura), cor de destaque e curva de entrada; converter em preset.", "dificuldade": "intermediário", "nichos": ["Arquitetura e interiores", "Arquitetura de alto padrão", "Reformas residenciais"], "graviton": "Preset 'Tour imobiliário' de legenda: posição central-alta para não cobrir o ambiente, contorno sutil para fundos claros."}, {"categoria": "Composição", "titulo": "Combine 9 videos in to 1 video with 3 by 3 Grid - Adobe Premiere Pro Tutorial", "url": "https://www.youtube.com/watch?v=XBIKcMbFzJY", "tecnica": "Mosaico em grade 3×3 de clipes", "observado": "Título e resumo: combinar 9 vídeos em um só, em grade 3×3, no Premiere Pro.", "hipotese": "Cada clipe escalado a ~33% e posicionado numa célula; possivelmente com recorte para preencher a célula.", "reproduzir": "Calcular células (largura/n, altura/n), escalar e recortar cada clipe em 'cover', gap opcional; para 9:16 usar 2×3 ou 3×4 em vez de 3×3.", "dificuldade": "básico", "nichos": ["Arquitetura e interiores", "Estética facial e corporal", "Odontologia", "Marketing e negócios"], "graviton": "Layout 'Mosaico de portfólio' (2×2, 2×3, 3×3) com montagem célula a célula animada; útil para 'vários projetos/casos' num só quadro."}, {"categoria": "Composição", "titulo": "How to create a SPLIT SCREEN or VIDEO COLLAGE Effect in DaVinci Resolve", "url": "https://www.youtube.com/watch?v=N9OHvsnSa-Q", "tecnica": "Split screen / colagem de vídeos no DaVinci Resolve", "observado": "Título: criar efeito de tela dividida ou colagem de vídeos no DaVinci Resolve.", "hipotese": "Uso de transformação/crop por clipe (ou ferramenta de layout do Fusion/Video Collage) para dividir o quadro em painéis.", "reproduzir": "Definir painéis por porcentagem do quadro, crop 'cover' por painel, bordas de 4–8px na cor de fundo; animar painéis entrando em sequência.", "dificuldade": "intermediário", "nichos": ["Serviços profissionais", "Arquitetura e interiores", "Marketing e negócios"], "graviton": "Variação de layout: painéis assimétricos (60/40, 1 grande + 2 pequenos) para pessoa + 2 B-rolls simultâneos."}, {"categoria": "Animações", "titulo": "3 Viral Real Estate Transitions in After Effects", "url": "https://www.youtube.com/watch?v=et1g5t3jHxM", "tecnica": "3 transições de imóveis: zoom na TV, match cut no armário e revelação pela porta", "observado": "Resumo da busca: três transições virais para imóveis no After Effects — zoom na TV, match cut no armário e revelação pela porta.", "hipotese": "Zoom na TV: câmera avança até a tela e o plano seguinte é inserido dentro dela (corner pin) até preencher o quadro. Match cut: porta do armário fecha num plano e abre no seguinte. Porta: máscara no vão da porta revela o novo ambiente.", "reproduzir": "Zoom na TV: rastrear 4 cantos da tela, inserir clipe B com corner pin e escalar até 100% do quadro em 12–18 frames. Match cut: cortar no quadro em que a porta cobre a lente e entrar no clipe B no mesmo ponto.", "dificuldade": "avançado", "nichos": ["Arquitetura e interiores", "Arquitetura de alto padrão", "Reformas residenciais"], "graviton": "Transição 'Entrar na tela': clipe B mapeado num quadrilátero definido pelo usuário (4 pontos) e expandido até tela cheia."}, {"categoria": "Animações", "titulo": "Smooth Speed Ramp TRANSITION Effects CAR Reels Tutorial", "url": "https://www.youtube.com/watch?v=E9rpqk9tJ48", "tecnica": "Speed ramp (rampa de velocidade) como transição", "observado": "Título e resumo: transições suaves com speed ramp para Reels de carros. Outro resultado da mesma busca aplica a mesma técnica a tours de imóveis.", "hipotese": "Clipe desacelera antes do corte, acelera forte no ponto de transição (muitas vezes com motion blur) e volta à velocidade normal no clipe seguinte.", "reproduzir": "Curva de velocidade por clipe: 100% → 40% (1s) → 400–800% (0,2–0,4s em volta do corte) → 100%; motion blur proporcional à velocidade; sincronizar o pico com a batida da música.", "dificuldade": "intermediário", "nichos": ["Arquitetura de alto padrão", "Reformas residenciais", "Marketing e negócios"], "graviton": "Recurso 'Rampa de velocidade' com presets de curva e alinhamento automático ao beat."}, {"categoria": "Materiais complementares", "titulo": "Documentary Collage Animation in After Effects - After Effects Tutorial", "url": "https://www.youtube.com/watch?v=7QkZGSo4_SE", "tecnica": "Grade de fotos que vira colagem documental animada", "observado": "Resumo da busca: monta uma grade de fotos e depois a anima em efeito de colagem, sem plugins, no After Effects.", "hipotese": "Fotos como cartões com borda branca e sombra, levemente rotacionados, entrando em sequência sobre fundo texturizado; câmera com leve drift.", "reproduzir": "Para cada foto: borda 3–5%, sombra difusa, rotação aleatória ±6°, entrada por escala 110%→100% + queda Y; intervalo 4–6 frames entre fotos; drift de câmera de 2–3% no conjunto.", "dificuldade": "intermediário", "nichos": ["Reformas residenciais", "Estética facial e corporal", "Odontologia", "Serviços profissionais"], "graviton": "Bloco 'Mural de resultados': recebe N fotos (casos, obras, depoimentos) e monta a colagem animada sobre a fala."}, {"categoria": "Materiais complementares", "titulo": "6 Editing Interviews with B Roll in Premiere Pro", "url": "https://www.youtube.com/watch?v=sJ3qXY_of14", "tecnica": "Cobrir cortes de entrevista/depoimento com B-roll", "observado": "Resumo da busca: como cobrir os cortes da entrevista com B-roll e como ajustar o áudio nas entrevistas, no Premiere Pro.", "hipotese": "B-roll em trilha superior posicionado exatamente sobre os jump cuts; áudio da entrevista contínuo por baixo (J/L cuts).", "reproduzir": "Detectar cortes na fala (jump cuts); inserir B-roll de 1,5–3s começando ~0,3s antes do corte e terminando depois; manter áudio da fala; ducking do áudio ambiente do B-roll.", "dificuldade": "básico", "nichos": ["Odontologia", "Estética facial e corporal", "Serviços profissionais"], "graviton": "Função 'Esconder jump cuts': ao remover silêncios, sugere B-roll da biblioteca do cliente sobre cada corte."}, {"categoria": "Edição completa", "titulo": "Complete Viral Realtor Video Masterclass in Premiere Pro", "url": "https://www.youtube.com/watch?v=Xdq22d85fPY", "tecnica": "Fluxo completo de Reel imobiliário: head tracking, legendas, speed ramps, transições e sound design", "observado": "Resumo da busca: workflow completo de Reel imobiliário com head tracking, legendas animadas, speed ramps, transições e sound design.", "hipotese": "Corretor em quadro com reenquadramento que segue a cabeça (head tracking), alternado com tour acelerado; SFX de whoosh nas transições.", "reproduzir": "Assistir e mapear a ordem dos recursos por segundo; extrair um template de cena: abertura com pessoa, tour com ramps, fechamento com CTA.", "dificuldade": "avançado", "nichos": ["Arquitetura e interiores", "Arquitetura de alto padrão", "Reformas residenciais"], "graviton": "Template 'Tour com apresentador': reenquadramento por rosto + rampas + SFX automáticos nas transições."}, {"categoria": "Edição completa", "titulo": "How I Edit Trending Real Estate Reels in Premiere Pro & After Effects", "url": "https://www.youtube.com/watch?v=gXt43lmwlyY", "tecnica": "Edição de Reels imobiliários em tendência (Premiere + After Effects)", "observado": "Título: como o autor edita Reels imobiliários em tendência usando Premiere Pro e After Effects.", "hipotese": "Combinação de legendas, transições por objeto e ritmo rápido de cortes no tour.", "reproduzir": "Assistir e comparar com a ref. 09 para separar o que é comum (padrão do nicho) do que é estilo do autor.", "dificuldade": "intermediário", "nichos": ["Arquitetura e interiores", "Arquitetura de alto padrão"], "graviton": "Insumo para o preset de ritmo do nicho imobiliário; validar após assistir."}];
+const P=["<div class=\"l room2\"></div><div class=\"l cap ed\"><span>um projeto <i>feito</i></span><span>para a sua <i>rotina</i></span></div>", "<div class=\"l room\"></div><div class=\"l cap rt\"><b>SALA</b> <b>INTEGRADA</b></div>", "<div class=\"l gr\"><i style=\"animation-delay:0.00s\"></i><i style=\"animation-delay:0.18s\"></i><i style=\"animation-delay:0.36s\"></i><i style=\"animation-delay:0.54s\"></i><i style=\"animation-delay:0.72s\"></i><i style=\"animation-delay:0.90s\"></i><i style=\"animation-delay:1.08s\"></i><i style=\"animation-delay:1.26s\"></i><i style=\"animation-delay:1.44s\"></i></div>", "<div class=\"l as\"><div><div class=\"l fig\" style=\"left:20%;right:20%\"></div></div><div></div><div></div></div>", "<div class=\"l room\"></div><div class=\"l tv\"><div class=\"l scr\"><div class=\"l room2\"></div></div></div>", "<div class=\"l rp\"></div><svg class=\"l gauge\" viewBox=\"0 0 100 26\" preserveAspectRatio=\"none\" aria-hidden=\"true\"><path d=\"M0 18 C20 18 25 22 40 22 C48 22 50 2 55 2 C60 2 62 18 70 18 L100 18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/></svg>", "<div class=\"l\" style=\"inset:0;background:#3B342D\"></div><div class=\"l ph a\"></div><div class=\"l ph b\"></div><div class=\"l ph c\"></div>", "<div class=\"l fig\"></div><div class=\"l cw\"><div class=\"l room2\"></div></div><div class=\"l cutmk\"></div>", "<div class=\"l hd\"><div class=\"l\" style=\"inset:0;background:var(--screen)\"></div><div class=\"l fig\"></div></div><div class=\"l tr rp\" style=\"animation:tr 4s infinite\"></div>", "<div class=\"l fig\"></div><div class=\"l flash\"><div class=\"l room\"></div></div><div class=\"l flash f2\"><div class=\"l room2\"></div></div><div class=\"l flash f3\" style=\"opacity:0\"></div><div class=\"l cap rt\" style=\"top:auto;bottom:20%\"><b>NOVO</b></div>"];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const grid=document.getElementById('grid');
+grid.innerHTML=DATA.map((d,i)=>`<article class="card" data-cat="${esc(d.categoria)}">
+ <div class="mon" role="img" aria-label="Animação ilustrativa: ${esc(d.tecnica)}">${P[i]}<span class="tag">ILUSTRATIVO</span></div>
+ <div class="info">
+  <div class="meta"><span class="chip cat">${esc(d.categoria)}</span><span class="chip d-${esc(d.dificuldade)}">${esc(d.dificuldade)}</span><span class="num">Ref. ${String(i+1).padStart(2,'0')}</span></div>
+  <h3>${esc(d.titulo)}</h3>
+  <p class="tec">${esc(d.tecnica)}</p>
+  <dl>
+   <div><dt>Observado (título/busca)</dt><dd>${esc(d.observado)}</dd></div>
+   <div><dt>Hipótese da técnica</dt><dd>${esc(d.hipotese)}</dd></div>
+   <div><dt>Como reproduzir</dt><dd>${esc(d.reproduzir)}</dd></div>
+   <div><dt>No Graviton</dt><dd>${esc(d.graviton)}</dd></div>
+   <div><dt>Nichos</dt><dd>${esc(d.nichos.join(', '))}</dd></div>
+  </dl>
+  <a class="src" href="${esc(d.url)}" target="_blank" rel="noopener">${esc(d.url.replace('https://',''))}</a>
+ </div></article>`).join('');
+const cats=['Todas',...new Set(DATA.map(d=>d.categoria))];
+const f=document.getElementById('filters');
+f.innerHTML=cats.map((c,i)=>`<button type="button" id="f${i}" aria-pressed="${i===0}">${esc(c)}</button>`).join('');
+f.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ f.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+ const c=b.textContent;grid.querySelectorAll('.card').forEach(el=>el.hidden=!(c==='Todas'||el.dataset.cat===c));});
+</script>
