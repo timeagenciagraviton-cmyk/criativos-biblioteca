@@ -1,0 +1,405 @@
+<title>Radar de Criativos 21/11</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: cabeçalho de pauta + galeria em grade de cards 9:16 com mini-demonstração, depois specs e prioridades em coluna única */
+:root{
+  --bg:#F2F3F6; --surface:#FFFFFF; --ink:#171A2C; --muted:#5B6075; --line:#DADDE6;
+  --accent:#D9481A; --accent-soft:#FBE3D9; --screen:#232742; --screen-ink:#F4F5FA;
+  --hi:#FFD23F; --ok:#1F7A4D; --warn:#A86400; --low:#5B6075;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12141F; --surface:#1B1E2E; --ink:#ECEDF3; --muted:#A2A6BA; --line:#2E3247;
+  --accent:#FF7A47; --accent-soft:#3A2219; --screen:#0B0C14; --screen-ink:#F4F5FA;
+  --hi:#FFD23F; --ok:#5CCB92; --warn:#F2B04C; --low:#A2A6BA; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12141F; --surface:#1B1E2E; --ink:#ECEDF3; --muted:#A2A6BA; --line:#2E3247;
+  --accent:#FF7A47; --accent-soft:#3A2219; --screen:#0B0C14; --screen-ink:#F4F5FA;
+  --hi:#FFD23F; --ok:#5CCB92; --warn:#F2B04C; --low:#A2A6BA; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-body)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 64px;display:flex;flex-direction:column;gap:48px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:700;letter-spacing:-.01em}
+h2{font-size:1.6rem;font-weight:700}
+h3{font-size:1.08rem;font-weight:600}
+p{margin:0}
+.eyebrow{font:500 .75rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+header{display:flex;flex-direction:column;gap:14px}
+.lede{max-width:68ch;color:var(--muted)}
+.meta{display:flex;flex-wrap:wrap;gap:8px 20px;font:400 .8rem var(--f-mono);color:var(--muted)}
+.meta b{color:var(--ink);font-weight:500}
+.notice{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;max-width:80ch}
+.notice strong{font-family:var(--f-display)}
+section{display:flex;flex-direction:column;gap:20px}
+.sec-head{display:flex;flex-direction:column;gap:6px}
+.sec-head p{color:var(--muted);max-width:70ch}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.filters button{font:500 .8rem var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.filters button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;grid-template-columns:104px 1fr;gap:14px;align-items:start}
+.card > div{min-width:0}
+.body{display:flex;flex-direction:column;gap:8px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font:500 .7rem/1 var(--f-mono);letter-spacing:.04em;padding:5px 7px;border-radius:5px;background:var(--bg);color:var(--muted);border:1px solid var(--line)}
+.tag.cat{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.desc{font-size:.9rem}
+dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:.82rem}
+dt{font:500 .7rem/1.6 var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+dd{margin:0;min-width:0}
+.link{font:500 .8rem var(--f-mono);color:var(--accent);word-break:break-all}
+details{font-size:.85rem;border-top:1px solid var(--line);padding-top:8px}
+summary{cursor:pointer;font-weight:600}
+details p{margin-top:6px}
+.obs{color:var(--ok);font-weight:600}.hip{color:var(--warn);font-weight:600}
+/* mini tela 9:16 */
+.phone{width:104px;max-width:100%;aspect-ratio:9/16;background:var(--screen);border-radius:12px;position:relative;overflow:hidden;color:var(--screen-ink)}
+.phone .cap{position:absolute;bottom:4px;left:0;right:0;text-align:center;font:500 .52rem var(--f-mono);opacity:.6}
+.face{position:absolute;left:50%;top:34%;width:38px;height:38px;border-radius:50%;background:#8A90B8;transform:translateX(-50%)}
+.face::after{content:"";position:absolute;left:-14px;top:40px;width:66px;height:60px;border-radius:30px 30px 0 0;background:#8A90B8}
+@media (prefers-reduced-motion:no-preference){
+ .k-words span{animation:kw 2.4s infinite}
+ .k-words span:nth-child(2){animation-delay:.6s}.k-words span:nth-child(3){animation-delay:1.2s}
+ .zoom .face{animation:pz 3s infinite}
+ .wipe .after{animation:wp 3s infinite ease-in-out}
+ .split .pane:nth-child(2){animation:sl 3s infinite}
+ .drift .scene{animation:dr 6s infinite alternate ease-in-out}
+ .cut .shot{animation:ct 2.4s infinite steps(1)}
+ .kin span{animation:kn 2.4s infinite}
+}
+.k-words{position:absolute;left:6px;right:6px;top:62%;display:flex;justify-content:center;gap:3px;font:700 .62rem var(--f-display);text-transform:uppercase}
+.k-words span{padding:1px 3px;border-radius:3px}
+@keyframes kw{0%,30%{background:var(--hi);color:#171A2C;transform:scale(1.12)}31%,100%{background:transparent;color:var(--screen-ink);transform:scale(1)}}
+@keyframes pz{0%,45%{transform:translateX(-50%) scale(1)}50%,95%{transform:translateX(-50%) scale(1.35)}100%{transform:translateX(-50%) scale(1)}}
+.wipe .before,.wipe .after{position:absolute;inset:0}
+.wipe .before{background:repeating-linear-gradient(135deg,#4A4F6E 0 6px,#3A3E59 6px 12px)}
+.wipe .after{background:linear-gradient(160deg,#E9D8C4,#C9A982);clip-path:inset(0 0 0 100%);border-left:2px solid #fff}
+@keyframes wp{0%,10%{clip-path:inset(0 0 0 100%)}50%,70%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0 0 0 100%)}}
+.split{display:grid;grid-template-rows:1fr 1fr;gap:3px;padding:3px}
+.split.three{grid-template-rows:1.3fr 1fr;grid-template-columns:1fr 1fr}
+.split.three .pane:first-child{grid-column:1/3}
+.pane{border-radius:6px;background:#4A4F6E}
+.pane.b{background:linear-gradient(160deg,#E9D8C4,#C9A982)}
+@keyframes sl{0%,40%{transform:translateX(0)}50%,90%{transform:translateX(0) scale(.94)}100%{transform:translateX(0)}}
+.drift .scene{position:absolute;inset:-20%;background:linear-gradient(180deg,#9DB4C8 0 40%,#E9D8C4 40% 70%,#8C6B4F 70%)}
+@keyframes dr{from{transform:scale(1) translate(0,0)}to{transform:scale(1.15) translate(-6%,-4%)}}
+.collage{position:absolute;inset:0}
+.collage i{position:absolute;border-radius:4px;display:block}
+.collage i:nth-child(1){left:10%;top:14%;width:55%;height:30%;background:#E9D8C4;transform:rotate(-6deg)}
+.collage i:nth-child(2){right:8%;top:38%;width:50%;height:26%;background:#8AC6D0;transform:rotate(5deg)}
+.collage i:nth-child(3){left:18%;bottom:14%;width:46%;height:22%;background:#F5F5F5;transform:rotate(-2deg)}
+.cut .shot{position:absolute;inset:0}
+@keyframes ct{0%{background:#4A4F6E}25%{background:#C9A982}50%{background:#6C7AA8}75%{background:#E9D8C4}}
+.kin{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;font:700 .8rem/1 var(--f-display);text-transform:uppercase}
+.kin span:nth-child(2){font-size:1.2rem;color:var(--hi);animation-delay:.4s}
+.kin span:nth-child(3){animation-delay:.8s}
+@keyframes kn{0%{transform:translateY(8px);opacity:.2}20%,80%{transform:none;opacity:1}100%{opacity:.2}}
+/* specs */
+.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.spec{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.spec .rank{font:500 .75rem var(--f-mono);color:var(--accent)}
+.spec ul{margin:0;padding-left:18px;font-size:.88rem;display:flex;flex-direction:column;gap:3px}
+.spec h4{margin:6px 0 0;font:500 .72rem var(--f-mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+code{font:400 .82em var(--f-mono);background:var(--bg);padding:1px 4px;border-radius:4px;border:1px solid var(--line)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:640px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 .72rem var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+.pill{display:inline-block;font:600 .72rem/1 var(--f-mono);padding:5px 8px;border-radius:999px;border:1px solid currentColor}
+.p-alta{color:var(--accent)}.p-media{color:var(--warn)}.p-baixa{color:var(--low)}
+.queue{font-size:.88rem;display:flex;flex-direction:column;gap:6px;padding-left:18px;margin:0}
+footer{font-size:.82rem;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+footer a{color:var(--accent)}
+@media (max-width:420px){.card{grid-template-columns:84px 1fr}.phone{width:84px}}
+</style>
+
+<div class="wrap">
+<header>
+  <span class="eyebrow">Graviton · Radar diário</span>
+  <h1>RADAR DE CRIATIVOS — 21/11/2026</h1>
+  <p class="lede">Dez referências de edição para alimentar a biblioteca de estilos do Graviton Video Editor: legendas, composição, transições, B-roll e ritmo. Foco em técnicas aplicáveis a arquitetura, reformas, estética, odontologia e serviços.</p>
+  <div class="meta"><span><b>10</b> referências</span><span><b>5</b> categorias</span><span><b>3</b> specs de implementação</span><span>Catálogo: <b>catalogo/referencias.json</b></span></div>
+  <div class="notice">
+    <strong>Limite desta coleta</strong>
+    <p>Nesta sessão, Vimeo, Videohive e outros hosts de vídeo estavam bloqueados pela rede. As referências foram localizadas e confirmadas por busca (título, autor e descrição da página), mas <b>nenhum vídeo foi assistido</b>. Por isso as miniaturas abaixo são demonstrações esquemáticas da técnica, não capturas do vídeo original, e os minutos exatos ficam como "a verificar". Em cada card, <span class="obs">Observado</span> marca o que a página da fonte afirma e <span class="hip">Hipótese</span> marca a leitura técnica provável. Nenhum dado de desempenho foi atribuído às referências.</p>
+  </div>
+</header>
+
+<section aria-labelledby="g">
+  <div class="sec-head"><span class="eyebrow">Galeria</span><h2 id="g">Referências do dia</h2></div>
+  <div class="filters" role="group" aria-label="Filtrar por categoria">
+    <button type="button" id="f-all" data-f="all" aria-pressed="true">Todas</button>
+    <button type="button" id="f-leg" data-f="Legendas" aria-pressed="false">Legendas</button>
+    <button type="button" id="f-comp" data-f="Composição" aria-pressed="false">Composição</button>
+    <button type="button" id="f-anim" data-f="Animações" aria-pressed="false">Animações e transições</button>
+    <button type="button" id="f-broll" data-f="B-roll" aria-pressed="false">B-roll</button>
+    <button type="button" id="f-full" data-f="Edição completa" aria-pressed="false">Edição completa</button>
+  </div>
+  <div class="grid" id="grid">
+
+  <article class="card" data-cat="Legendas">
+    <div class="phone kin" aria-hidden="true"><div class="kin"><span>Seu</span><span>projeto</span><span>pronto</span></div><span class="cap">esquema</span></div>
+    <div class="body">
+      <div class="tags"><span class="tag cat">Legendas</span><span class="tag">Avançado</span><span class="tag">REF-0001</span></div>
+      <h3>Kinetic Typography Reel</h3>
+      <a class="link" href="https://www.behance.net/gallery/91618125/Kinetic-Typography-Reel" target="_blank" rel="noopener">behance.net/gallery/91618125</a>
+      <p class="desc">Tipografia cinética usada como elemento principal da cena, com palavras que entram, escalam e se reorganizam.</p>
+      <dl><dt>Criador</dt><dd>Sergey Irkhin</dd><dt>Nichos</dt><dd>Marketing, serviços, alto padrão (títulos de abertura)</dd><dt>Momento</dt><dd>A verificar</dd></dl>
+      <details><summary>Análise técnica</summary>
+        <p><span class="obs">Observado:</span> projeto de pesquisa visual em Cinema 4D e After Effects, preparado para um workshop. Referência antiga (técnica atemporal).</p>
+        <p><span class="hip">Hipótese:</span> animação por palavra com variação forte de escala e peso e camadas 3D extrudadas.</p>
+        <p><b>Como reproduzir:</b> separar a frase em palavras, aplicar entrada escalonada (offset de 80–120 ms), dar à palavra-chave 2× o corpo e uma cor de destaque. A versão 3D fica fora do escopo inicial.</p>
+        <p><b>No Graviton:</b> preset "Título de impacto" para os 2 primeiros segundos (gancho).</p>
+      </details>
+    </div>
+  </article>
+
+  <article class="card" data-cat="Legendas">
+    <div class="phone" aria-hidden="true"><div class="face"></div><div class="k-words"><span>Reforma</span><span>sem</span><span>obra</span></div><span class="cap">esquema</span></div>
+    <div class="body">
+      <div class="tags"><span class="tag cat">Legendas</span><span class="tag">Básico</span><span class="tag">REF-0002</span></div>
+      <h3>Box Highlight, Karaoke e Impact Pop</h3>
+      <a class="link" href="https://dhl.veed.io/tools/add-subtitles/animated-subtitles" target="_blank" rel="noopener">veed.io · animated subtitles</a>
+      <p class="desc">Três variações de legenda palavra-a-palavra: caixa colorida atrás da palavra falada, varredura de cor estilo karaokê e "pop" de escala.</p>
+      <dl><dt>Criador</dt><dd>VEED</dd><dt>Nichos</dt><dd>Todos; base para talking head</dd><dt>Momento</dt><dd>Contínuo</dd></dl>
+      <details><summary>Análise técnica</summary>
+        <p><span class="obs">Observado:</span> a página lista os presets Box Highlight, Karaoke e Impact Pop para TikTok, Reels e Shorts. Ferramentas como Choppity e Wayin listam estilos equivalentes (karaoke, bounce, highlight).</p>
+        <p><span class="hip">Hipótese:</span> todas dependem de timestamps por palavra gerados por transcrição automática.</p>
+        <p><b>Como reproduzir:</b> transcrição com timestamps por palavra, agrupamento de 1–3 palavras por tela, estado ativo na palavra corrente (cor, caixa ou escala).</p>
+        <p><b>No Graviton:</b> três presets de legenda sobre o mesmo motor. Ver spec nº 2.</p>
+      </details>
+    </div>
+  </article>
+
+  <article class="card" data-cat="Composição">
+    <div class="phone" aria-hidden="true"><div class="split three" style="position:absolute;inset:0"><span class="pane"></span><span class="pane"></span><span class="pane b"></span></div><span class="cap">esquema</span></div>
+    <div class="body">
+      <div class="tags"><span class="tag cat">Composição</span><span class="tag">Intermediário</span><span class="tag">REF-0003</span></div>
+      <h3>Vertical Multiscreen Before After</h3>
+      <a class="link" href="https://videohive.net/item/vertical-multiscreen-before-after/61870962" target="_blank" rel="noopener">videohive.net/item/61870962</a>
+      <p class="desc">Mosaico vertical 1080×1920 com várias janelas para mostrar etapas de uma transformação.</p>
+      <dl><dt>Criador</dt><dd>Autor no Videohive</dd><dt>Nichos</dt><dd>Reformas, interiores, estética</dd><dt>Momento</dt><dd>A verificar na prévia</dd></dl>
+      <details><summary>Análise técnica</summary>
+        <p><span class="obs">Observado:</span> formato 1080×1920, cita reformas de interiores como uso, e expõe velocidade, duração, fundo, contorno (stroke) e raio de canto como ajustes.</p>
+        <p><span class="hip">Hipótese:</span> janelas com máscaras arredondadas que entram em sequência e trocam de conteúdo.</p>
+        <p><b>Como reproduzir:</b> grade de 2 a 4 slots com gutter, raio e borda configuráveis; cada slot recebe um clipe ou foto; entrada em cascata.</p>
+        <p><b>No Graviton:</b> layouts "Antes | Etapa | Depois" para obras e projetos.</p>
+      </details>
+    </div>
+  </article>
+
+  <article class="card" data-cat="Composição">
+    <div class="phone split" aria-hidden="true" style="display:grid"><span class="pane"></span><span class="pane b"></span><span class="cap">esquema</span></div>
+    <div class="body">
+      <div class="tags"><span class="tag cat">Composição</span><span class="tag">Intermediário</span><span class="tag">REF-0004</span></div>
+      <h3>Vertical Dynamic Split Screens</h3>
+      <a class="link" href="https://videohive.net/item/vertical-dynamic-split-screens/61391064" target="_blank" rel="noopener">videohive.net/item/61391064</a>
+      <p class="desc">Tela dividida vertical para comparar ambientes antes e depois, com movimento entre as metades.</p>
+      <dl><dt>Criador</dt><dd>Autor no Videohive</dd><dt>Nichos</dt><dd>Interiores, reformas, odontologia</dd><dt>Momento</dt><dd>A verificar na prévia</dd></dl>
+      <details><summary>Análise técnica</summary>
+        <p><span class="obs">Observado:</span> a listagem cita before/after de ambientes para TikTok, Reels e Shorts.</p>
+        <p><span class="hip">Hipótese:</span> metades que deslizam ou escalam levemente para guiar o olhar da metade "antes" para a "depois".</p>
+        <p><b>Como reproduzir:</b> dois slots empilhados (talking head em cima, projeto embaixo, ou antes/depois), com divisor animado e rótulos.</p>
+        <p><b>No Graviton:</b> layout "Especialista + Projeto": a pessoa fala em cima e o render ou a obra aparece embaixo.</p>
+      </details>
+    </div>
+  </article>
+
+  <article class="card" data-cat="Animações">
+    <div class="phone wipe" aria-hidden="true"><div class="before"></div><div class="after"></div><span class="cap">esquema</span></div>
+    <div class="body">
+      <div class="tags"><span class="tag cat">Animações e transições</span><span class="tag">Intermediário</span><span class="tag">REF-0005</span></div>
+      <h3>Vertical Before And After Pack</h3>
+      <a class="link" href="https://videohive.net/item/vertical-before-and-after-pack/60151516" target="_blank" rel="noopener">videohive.net/item/60151516</a>
+      <p class="desc">Revelação por máscara: a imagem "depois" desliza sobre a "antes" com uma linha divisória.</p>
+      <dl><dt>Criador</dt><dd>Autor no Videohive</dd><dt>Nichos</dt><dd>Reformas, interiores, odontologia, estética</dd><dt>Momento</dt><dd>A verificar na prévia</dd></dl>
+      <details><summary>Análise técnica</summary>
+        <p><span class="obs">Observado:</span> toolkit 9:16 para After Effects com revelação baseada em máscara; cita revelações de design de interiores.</p>
+        <p><span class="hip">Hipótese:</span> wipe linear com borda clara e rótulos ANTES/DEPOIS.</p>
+        <p><b>Como reproduzir:</b> duas camadas alinhadas e uma máscara animada (linear, diagonal ou circular) com easing e hold no final.</p>
+        <p><b>No Graviton:</b> transição "Revelação Antes/Depois". Ver spec nº 1.</p>
+      </details>
+    </div>
+  </article>
+
+  <article class="card" data-cat="Animações">
+    <div class="phone zoom" aria-hidden="true"><div class="face"></div><span class="cap">esquema</span></div>
+    <div class="body">
+      <div class="tags"><span class="tag cat">Animações e transições</span><span class="tag">Básico</span><span class="tag">REF-0006</span></div>
+      <h3>Presets Cinematic e Punch-In</h3>
+      <a class="link" href="https://mozaik.featurebase.app/en/changelog/add-motion-to-any-clip-mag" target="_blank" rel="noopener">mozaik changelog · 09/09/2026</a>
+      <p class="desc">Dois movimentos de câmera simulados aplicáveis a qualquer clipe: um drift lento estilo Ken Burns e um push-in rápido.</p>
+      <dl><dt>Criador</dt><dd>Mozaik</dd><dt>Nichos</dt><dd>Todos; talking head e fotos</dd><dt>Momento</dt><dd>Aplicado por clipe</dd></dl>
+      <details><summary>Análise técnica</summary>
+        <p><span class="obs">Observado:</span> o changelog descreve "Cinematic" como drift lento para talking heads e fotos e "Punch-In" como movimento rápido para clipes sociais. Afirma que o punch-in segura atenção, sem dados publicados.</p>
+        <p><span class="hip">Hipótese:</span> keyframes de escala e posição sobre um crop da imagem.</p>
+        <p><b>Como reproduzir:</b> escala 1.00→1.12 (punch, 4–6 frames) ou 1.00→1.06 ao longo do clipe (drift), ancorada no rosto.</p>
+        <p><b>No Graviton:</b> ver spec nº 3.</p>
+      </details>
+    </div>
+  </article>
+
+  <article class="card" data-cat="B-roll">
+    <div class="phone drift" aria-hidden="true"><div class="scene"></div><span class="cap">esquema</span></div>
+    <div class="body">
+      <div class="tags"><span class="tag cat">B-roll</span><span class="tag">Avançado</span><span class="tag">REF-0007</span></div>
+      <h3>THE ONE IBIZA — Cinematic Archviz</h3>
+      <a class="link" href="https://vimeo.com/1104898337" target="_blank" rel="noopener">vimeo.com/1104898337</a>
+      <p class="desc">Animação arquitetônica de alto padrão com câmera coreografada e transições de luz e sombra.</p>
+      <dl><dt>Criador</dt><dd>gmsvision</dd><dt>Nichos</dt><dd>Arquitetura de alto padrão, interiores</dd><dt>Momento</dt><dd>A verificar</dd></dl>
+      <details><summary>Análise técnica</summary>
+        <p><span class="obs">Observado:</span> a página cita coreografia de câmera cinematográfica e transições de luz natural e sombra. Um post da Autodesk (set/2026) sobre o projeto UMBRAL recomenda limitar a câmera a dolly, slider e push-ins sutis para não competir com a arquitetura.</p>
+        <p><span class="hip">Hipótese:</span> planos longos e lentos, adequados como B-roll de 1,5–3 s entre falas do arquiteto.</p>
+        <p><b>Como reproduzir:</b> no editor, cortes de render em velocidade 100% com drift leve e transição por dissolve curto; nada de whip pan.</p>
+        <p><b>No Graviton:</b> perfil de ritmo "Alto padrão": cortes mais longos e movimento mínimo.</p>
+      </details>
+    </div>
+  </article>
+
+  <article class="card" data-cat="B-roll">
+    <div class="phone" aria-hidden="true"><div class="collage"><i></i><i></i><i></i></div><span class="cap">esquema</span></div>
+    <div class="body">
+      <div class="tags"><span class="tag cat">B-roll</span><span class="tag">Avançado</span><span class="tag">REF-0008</span></div>
+      <h3>Collage Animation for a Dental Clinic</h3>
+      <a class="link" href="https://vimeo.com/1211079467" target="_blank" rel="noopener">vimeo.com/1211079467</a>
+      <p class="desc">Colagem animada com ilustração científica e motion minimalista para explicar um procedimento odontológico.</p>
+      <dl><dt>Criador</dt><dd>Não confirmado</dd><dt>Nichos</dt><dd>Odontologia, estética, saúde</dd><dt>Momento</dt><dd>A verificar</dd></dl>
+      <details><summary>Análise técnica</summary>
+        <p><span class="obs">Observado:</span> a descrição indexada combina design de colagem, ilustração científica e motion minimalista para explicar o procedimento.</p>
+        <p><span class="hip">Hipótese:</span> recortes com leve rotação e sombra entrando por camadas, como alternativa a imagens clínicas explícitas.</p>
+        <p><b>Como reproduzir:</b> cartões de imagem recortados com rotação de ±6°, sombra suave e entrada escalonada sobre fundo neutro.</p>
+        <p><b>No Graviton:</b> bloco "Explicação de procedimento" para inserir entre falas do dentista ou da esteticista.</p>
+      </details>
+    </div>
+  </article>
+
+  <article class="card" data-cat="Edição completa">
+    <div class="phone cut" aria-hidden="true"><div class="shot"></div><div class="k-words"><span>3</span><span>quartos</span><span>vista</span></div><span class="cap">esquema</span></div>
+    <div class="body">
+      <div class="tags"><span class="tag cat">Edição completa</span><span class="tag">Intermediário</span><span class="tag">REF-0009</span></div>
+      <h3>Short Form Real Estate Video</h3>
+      <a class="link" href="https://contra.com/p/eUEvEboP-short-form-real-estate-video" target="_blank" rel="noopener">contra.com/p/eUEvEboP</a>
+      <p class="desc">Vídeo curto de imóvel com cortes rápidos, texto animado pesado e efeitos visuais.</p>
+      <dl><dt>Criador</dt><dd>Freelancer no Contra</dd><dt>Nichos</dt><dd>Interiores, reformas, imobiliário</dd><dt>Momento</dt><dd>A verificar</dd></dl>
+      <details><summary>Análise técnica</summary>
+        <p><span class="obs">Observado:</span> a descrição destaca ênfase forte em texto animado e VFX, e cortes rápidos com legendas para manter a atenção (afirmação do autor, sem métricas).</p>
+        <p><span class="hip">Hipótese:</span> um corte a cada 1–2 s sincronizado à trilha, com números do imóvel em texto grande.</p>
+        <p><b>Como reproduzir:</b> marcadores de batida na trilha, cortes nos marcadores e legendas com destaque de números (m², quartos, prazo).</p>
+        <p><b>No Graviton:</b> perfil de ritmo "Tour rápido". Um contraponto do guia Async defende cortes simples com foco no imóvel, então o editor deve oferecer os dois perfis.</p>
+      </details>
+    </div>
+  </article>
+
+  <article class="card" data-cat="Edição completa">
+    <div class="phone cut" aria-hidden="true"><div class="shot"></div><div class="face" style="opacity:.85"></div><span class="cap">esquema</span></div>
+    <div class="body">
+      <div class="tags"><span class="tag cat">Edição completa</span><span class="tag">Intermediário</span><span class="tag">REF-0010</span></div>
+      <h3>Performance Video Ads Reel</h3>
+      <a class="link" href="https://vimeo.com/1196628872" target="_blank" rel="noopener">vimeo.com/1196628872</a>
+      <p class="desc">Reel de anúncios de performance para campanhas digitais de ritmo acelerado.</p>
+      <dl><dt>Criador</dt><dd>Victor Nils</dd><dt>Nichos</dt><dd>Marketing e negócios</dd><dt>Momento</dt><dd>A verificar</dd></dl>
+      <details><summary>Análise técnica</summary>
+        <p><span class="obs">Observado:</span> só título e autor foram confirmados; o texto indexado da página não descreve as técnicas.</p>
+        <p><span class="hip">Hipótese:</span> deve servir de benchmark de ritmo de anúncios (gancho, prova, CTA). Precisa ser assistido antes de virar preset.</p>
+        <p><b>Próximo passo:</b> assistir e marcar minuto a minuto as trocas de enquadramento, a cadência de cortes e as entradas de texto.</p>
+        <p><b>No Graviton:</b> referência para calibrar o perfil "Performance".</p>
+      </details>
+    </div>
+  </article>
+
+  </div>
+</section>
+
+<section aria-labelledby="t3">
+  <div class="sec-head"><span class="eyebrow">Integração com o editor</span><h2 id="t3">Top 3 técnicas do dia</h2><p>Especificações para a biblioteca de estilos. Nenhuma mudança foi feita no editor em produção.</p></div>
+  <div class="specs">
+    <article class="spec">
+      <span class="rank">Spec 1 · base REF-0003, 0004, 0005</span>
+      <h3>Revelação Antes/Depois</h3>
+      <p>O "depois" descobre o "antes" com uma linha divisória em movimento, seguido de uma pausa com rótulos.</p>
+      <h4>Elementos</h4><ul><li>Duas mídias alinhadas (foto ou vídeo)</li><li>Máscara animada e linha divisória</li><li>Rótulos ANTES / DEPOIS opcionais</li></ul>
+      <h4>Parâmetros</h4><ul><li>Forma: linear, diagonal, circular, slider com vai-e-volta</li><li>Direção; duração (0,6–1,5 s); easing (easeInOutCubic)</li><li>Linha: cor, espessura, brilho; hold final (0,5–2 s)</li><li>Ajuste de alinhamento (offset e escala da mídia "antes")</li></ul>
+      <h4>Animação</h4><p>A máscara percorre o quadro com easing, para no fim e os rótulos entram com fade de 150 ms. No modo slider, vai até 30%, volta e completa.</p>
+      <h4>Aplicações</h4><p>Reformas, interiores, harmonização, clareamento e lentes dentais, render × obra pronta.</p>
+      <h4>Tecnologia</h4><p>FFmpeg <code>xfade</code> (transições <code>wipeleft</code>, <code>circleopen</code>, <code>diagtl</code>) para o render; <code>clip-path</code> em Canvas ou WebGL para a prévia; Remotion se o editor já for React.</p>
+    </article>
+    <article class="spec">
+      <span class="rank">Spec 2 · base REF-0002, 0001</span>
+      <h3>Legenda com destaque por palavra</h3>
+      <p>Legenda de 1 a 3 palavras por tela em que a palavra falada recebe caixa, cor ou escala.</p>
+      <h4>Elementos</h4><ul><li>Transcrição com timestamps por palavra</li><li>Fonte de display e cor de destaque da marca</li><li>Lista de palavras-chave (números, termos do nicho)</li></ul>
+      <h4>Parâmetros</h4><ul><li>Modo: Box, Karaokê (varredura), Pop (escala 1,0→1,15)</li><li>Palavras por grupo; caixa alta; posição (terço inferior ou centro)</li><li>Cores de texto, destaque e contorno; sombra</li><li>Destaque automático de números e palavras-chave</li></ul>
+      <h4>Animação</h4><p>O grupo entra em 80 ms; o estado ativo troca na hora exata da palavra; o pop dura de 4 a 6 frames com overshoot leve.</p>
+      <h4>Aplicações</h4><p>Todo talking head; com estilo editorial em minúsculas e serifa para o alto padrão.</p>
+      <h4>Tecnologia</h4><p>Whisper ou WhisperX com <code>word_timestamps</code>; legendas ASS via libass (tags <code>\k</code> para karaokê, <code>\t</code> para escala) queimadas pelo FFmpeg; ou componente React/Remotion.</p>
+    </article>
+    <article class="spec">
+      <span class="rank">Spec 3 · base REF-0006</span>
+      <h3>Câmera simulada: Punch-in e Drift</h3>
+      <p>Zoom de ênfase nas frases-chave e drift lento contínuo para dar vida a planos estáticos e fotos de projeto.</p>
+      <h4>Elementos</h4><ul><li>Clipe ou foto em resolução maior que a saída (ou upscale)</li><li>Detecção de rosto para ancorar o zoom</li><li>Marcadores de ênfase (manuais ou vindos da transcrição)</li></ul>
+      <h4>Parâmetros</h4><ul><li>Modo: Punch (corte seco ou rápido), Drift, Ken Burns com direção</li><li>Escala-alvo (1,05–1,25); duração; easing</li><li>Âncora: rosto, centro, ponto manual</li><li>Gatilho: a cada N frases, em palavras-chave, por batida</li></ul>
+      <h4>Animação</h4><p>Punch: escala 1,00→1,12 em 4–6 frames, mantida até o próximo corte. Drift: 1,00→1,06 durante todo o clipe, com translação leve.</p>
+      <h4>Aplicações</h4><p>Talking head de qualquer nicho; fotos e renders de arquitetura (drift); depoimentos.</p>
+      <h4>Tecnologia</h4><p>FFmpeg <code>zoompan</code> ou <code>crop</code>+<code>scale</code> com expressões; MediaPipe Face Detection para a âncora; keyframes no motor de prévia.</p>
+    </article>
+  </div>
+</section>
+
+<section aria-labelledby="ideias">
+  <div class="sec-head"><span class="eyebrow">Ideias novas</span><h2 id="ideias">Componentes e funcionalidades</h2></div>
+  <ul class="queue">
+    <li><b>B-roll guiado pela transcrição:</b> sugerir inserção de material só nas frases que pedem ilustração, como recomenda o <a class="link" href="https://www.opus.pro/blog/talking-head-videos-guide" target="_blank" rel="noopener">guia de talking head da Opus</a>.</li>
+    <li><b>Parallax 2.5D para fotos de projeto:</b> mapa de profundidade monocular (como Depth Anything) e camadas com deslocamento, técnica descrita pela CapCut e pela Cloudpano.</li>
+    <li><b>Perfis de ritmo por nicho:</b> "Alto padrão" (cortes longos e movimento mínimo), "Tour rápido" (cortes na batida) e "Performance".</li>
+    <li><b>Bloco de colagem animada:</b> recortes rotacionados que explicam procedimentos sem expor imagem clínica sensível.</li>
+    <li><b>Checklist de conformidade em saúde:</b> aviso ao usar antes/depois em odontologia e estética, pois há regras de conselhos profissionais e de consentimento do paciente.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="impl">
+  <div class="sec-head"><span class="eyebrow">Prioridades</span><h2 id="impl">O QUE VALE IMPLEMENTAR NO EDITOR</h2></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Prioridade</th><th>Proposta</th><th>Por quê</th><th>Esforço</th></tr></thead>
+    <tbody>
+      <tr><td><span class="pill p-alta">Alta</span></td><td>Legenda com destaque por palavra (Box, Karaokê, Pop)</td><td>Entra em praticamente todo criativo e tem pipeline conhecido (Whisper + ASS)</td><td>Médio</td></tr>
+      <tr><td><span class="pill p-alta">Alta</span></td><td>Revelação Antes/Depois</td><td>Formato central em reformas, interiores, odontologia e estética; o FFmpeg já tem as transições prontas</td><td>Baixo</td></tr>
+      <tr><td><span class="pill p-alta">Alta</span></td><td>Punch-in e Drift com âncora no rosto</td><td>Dá dinâmica ao talking head sem material extra</td><td>Baixo a médio</td></tr>
+      <tr><td><span class="pill p-media">Média</span></td><td>Layouts de multitela e split vertical ("Especialista + Projeto")</td><td>Permite mostrar a pessoa e o projeto ao mesmo tempo</td><td>Médio</td></tr>
+      <tr><td><span class="pill p-media">Média</span></td><td>Perfis de ritmo por nicho</td><td>As fontes divergem entre corte rápido e corte contido, então vale deixar a escolha por nicho</td><td>Médio</td></tr>
+      <tr><td><span class="pill p-media">Média</span></td><td>Parallax 2.5D em fotos e renders</td><td>Reaproveita o acervo de fotos de arquitetura</td><td>Alto</td></tr>
+      <tr><td><span class="pill p-baixa">Baixa</span></td><td>Colagem animada explicativa</td><td>Nicho específico (saúde) e trabalho de design por peça</td><td>Alto</td></tr>
+      <tr><td><span class="pill p-baixa">Baixa</span></td><td>Tipografia cinética 3D</td><td>Visual forte, mas custo alto de render e pouco reuso</td><td>Alto</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section aria-labelledby="fila">
+  <div class="sec-head"><span class="eyebrow">Fila de revisão manual</span><h2 id="fila">Para assistir antes do próximo radar</h2><p>Encontrados na Meta Ads Library (Brasil, ativos), mas a API não traz o vídeo. Não entram na contagem do dia.</p></div>
+  <ul class="queue">
+    <li>Sergio Gabriel - Arquitetura e Design de Interiores, "Projetos de Arquitetura para construções e reformas": <a class="link" href="https://www.facebook.com/ads/library/?id=1853682752613738" target="_blank" rel="noopener">anúncio 1853682752613738</a>, <a class="link" href="https://www.facebook.com/ads/library/?id=2337642846983870" target="_blank" rel="noopener">2337642846983870</a>, <a class="link" href="https://www.facebook.com/ads/library/?id=1988506432534434" target="_blank" rel="noopener">1988506432534434</a> (a página tem 10+ variações ativas, útil para comparar edições de um mesmo anunciante).</li>
+    <li>David Moum, "Editing &amp; Motion Graphics || 2026 Reel": <a class="link" href="https://vimeo.com/1191581815" target="_blank" rel="noopener">vimeo.com/1191581815</a></li>
+    <li>Pat Animation Studio, projeto de vídeo animado para clínica odontológica: <a class="link" href="https://www.behance.net/patanimationstudio" target="_blank" rel="noopener">behance.net/patanimationstudio</a></li>
+  </ul>
+</section>
+
+<footer>Catálogo persistente no repositório criativos-biblioteca: <code>catalogo/referencias.json</code>. Todas as referências estão com status "não iniciado". Para prévias reais nos próximos radares, libere vimeo.com, videohive.net e behance.net na política de rede do ambiente.</footer>
+</div>
+
+<script>
+(function(){
+  var btns=document.querySelectorAll('.filters button');
+  var cards=document.querySelectorAll('#grid .card');
+  btns.forEach(function(b){b.addEventListener('click',function(){
+    var f=b.getAttribute('data-f');
+    btns.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+    cards.forEach(function(c){c.hidden=!(f==='all'||c.getAttribute('data-cat')===f)});
+  })});
+})();
+</script>
