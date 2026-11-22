@@ -1,0 +1,262 @@
+<title>Radar de Criativos 22/11</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: mesa de edição. Cabeçalho com timecode, faixa de aviso, grade de cards com quadro 9:16 à esquerda e ficha técnica à direita, depois specs e prioridades. */
+:root {
+  --bg: #f3f4f6; --panel: #ffffff; --ink: #16181d; --muted: #5b6170; --line: #dde0e6;
+  --accent: #d9482b; --accent-soft: #fbe3dc; --frame: #23262e; --frame-2: #353a46; --frame-ink: #f2f3f5;
+  --warn-bg: #fff4d6; --warn-ink: #6b4b00;
+  --hi: #f5c518; --alt: #5aa7c9;
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121419; --panel: #1b1e25; --ink: #eceef2; --muted: #9aa1b0; --line: #2b2f39;
+  --accent: #ff7356; --accent-soft: #3a211b; --frame: #0b0c10; --frame-2: #262a34; --frame-ink: #f2f3f5;
+  --warn-bg: #33290f; --warn-ink: #f3d68a; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #121419; --panel: #1b1e25; --ink: #eceef2; --muted: #9aa1b0; --line: #2b2f39;
+  --accent: #ff7356; --accent-soft: #3a211b; --frame: #0b0c10; --frame-2: #262a34; --frame-ink: #f2f3f5;
+  --warn-bg: #33290f; --warn-ink: #f3d68a; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-block: 32px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 28px; }
+header { display: grid; gap: 6px; }
+.tc { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; color: var(--accent); text-transform: uppercase; }
+h1 { font-family: var(--display); font-weight: 800; font-size: clamp(28px, 5vw, 44px); line-height: 1.05; margin: 0; text-wrap: balance; letter-spacing: -.01em; }
+h2 { font-family: var(--display); font-weight: 700; font-size: 22px; margin: 0; text-wrap: balance; }
+h3 { font-family: var(--display); font-weight: 700; font-size: 17px; margin: 0; line-height: 1.25; text-wrap: balance; }
+p { margin: 0; max-width: 68ch; }
+.lead { color: var(--muted); }
+.warn { background: var(--warn-bg); color: var(--warn-ink); border-radius: 10px; padding: 14px 16px; display: grid; gap: 6px; font-size: 14px; }
+.warn strong { font-weight: 600; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.filters button { font: 500 13px var(--body); color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; cursor: pointer; }
+.filters button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.filters button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 500px), 1fr)); gap: 16px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; grid-template-columns: 132px 1fr; gap: 14px; }
+.card > div { min-width: 0; display: grid; gap: 8px; align-content: start; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+.chip { border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; }
+.chip.cat { color: var(--accent); border-color: var(--accent); }
+.desc { font-size: 14px; }
+.label { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.obs, .hip { font-size: 13.5px; }
+.hip { color: var(--muted); }
+.card a.link { font-weight: 600; color: var(--accent); text-decoration: none; font-size: 13.5px; overflow-wrap: anywhere; }
+.card a.link:hover { text-decoration: underline; }
+.app { font-size: 13.5px; background: var(--accent-soft); border-radius: 8px; padding: 8px 10px; }
+/* Quadro 9:16 */
+.frame { width: 132px; aspect-ratio: 9 / 16; max-width: 100%; background: var(--frame); border-radius: 10px; position: relative; overflow: hidden; color: var(--frame-ink); }
+.frame .tag { position: absolute; left: 6px; bottom: 6px; font: 500 9px var(--mono); letter-spacing: .05em; opacity: .7; z-index: 5; }
+.face { position: absolute; left: 50%; top: 30%; width: 44%; aspect-ratio: 1; border-radius: 50%; background: #8b93a7; transform: translateX(-50%); }
+.face::after { content: ""; position: absolute; left: -30%; right: -30%; top: 105%; height: 120%; border-radius: 50% 50% 0 0; background: #6d7488; }
+.cap { position: absolute; left: 6px; right: 6px; top: 70%; text-align: center; font: 800 11px var(--display); line-height: 1.2; z-index: 3; }
+.cap span { padding: 0 2px; border-radius: 3px; }
+.k1 span { animation: kar 2.4s infinite steps(1); }
+.k1 span:nth-child(2) { animation-delay: .6s } .k1 span:nth-child(3) { animation-delay: 1.2s } .k1 span:nth-child(4) { animation-delay: 1.8s }
+@keyframes kar { 0% { background: var(--hi); color: #16181d } 25%, 100% { background: transparent; color: var(--frame-ink) } }
+.emo { position: absolute; top: 58%; left: 62%; font-size: 15px; animation: pop 2.4s infinite; z-index: 4; }
+@keyframes pop { 0%, 60% { transform: scale(0) } 70% { transform: scale(1.3) } 80%, 100% { transform: scale(1) } }
+.em { color: var(--hi); display: inline-block; animation: emph 2.4s infinite; font-size: 14px; }
+@keyframes emph { 0%, 30% { transform: scale(1) } 40% { transform: scale(1.25) } 50%, 100% { transform: scale(1.12) } }
+.split { position: absolute; inset: 0; display: grid; grid-template-rows: 1fr 1fr; gap: 3px; background: var(--frame-ink); }
+.split > div { position: relative; overflow: hidden; background: var(--frame); }
+.split .b { background: linear-gradient(135deg, #a67c52, #e1c79f); animation: slideIn 3s infinite; }
+@keyframes slideIn { 0% { transform: translateX(100%) } 20%, 100% { transform: translateX(0) } }
+.room { position: absolute; inset: 0; background: linear-gradient(180deg, #d8d2c6 0 55%, #9c8063 55% 100%); }
+.room::before { content: ""; position: absolute; left: 14%; top: 22%; width: 32%; height: 26%; background: #9fc5d8; border: 3px solid #f4f1ea; }
+.room::after { content: ""; position: absolute; left: 50%; top: 46%; width: 40%; height: 16%; background: #4d5566; border-radius: 6px 6px 2px 2px; }
+.pip { position: absolute; right: 8px; top: 10px; width: 46%; aspect-ratio: 3 / 4; border-radius: 10px; overflow: hidden; background: var(--frame-2); box-shadow: 0 4px 10px rgba(0,0,0,.4); animation: pipIn 3s infinite; }
+@keyframes pipIn { 0% { transform: scale(.6); opacity: 0 } 15%, 100% { transform: scale(1); opacity: 1 } }
+.pip .face { top: 22%; width: 46% }
+.zoom { position: absolute; inset: 0; animation: dz 4s infinite alternate ease-in-out; transform-origin: 50% 35%; }
+@keyframes dz { from { transform: scale(1) } to { transform: scale(1.14) } }
+.before { position: absolute; inset: 0; background: linear-gradient(180deg, #9a958c 0 55%, #6f6a62 55% 100%); }
+.before::after { content: ""; position: absolute; left: 20%; top: 30%; width: 60%; height: 8%; background: #5b574f; transform: rotate(-6deg); }
+.after { position: absolute; inset: 0; }
+.wipe .after { animation: wipe 3.6s infinite ease-in-out; }
+@keyframes wipe { 0% { clip-path: inset(0 100% 0 0) } 35%, 55% { clip-path: inset(0 50% 0 0) } 85%, 100% { clip-path: inset(0 0 0 0) } }
+.divider { position: absolute; top: 0; bottom: 0; width: 2px; background: #fff; animation: divx 3.6s infinite ease-in-out; z-index: 3; }
+.divider::after { content: ""; position: absolute; top: 50%; left: -7px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transform: translateY(-50%); }
+@keyframes divx { 0% { left: 0 } 35%, 55% { left: 50% } 85%, 100% { left: calc(100% - 2px) } }
+.lbl { position: absolute; top: 8px; font: 600 8px var(--mono); background: rgba(0,0,0,.55); color: #fff; padding: 1px 4px; border-radius: 3px; z-index: 4; }
+.toggle .after { animation: tgl 3s infinite steps(1); }
+@keyframes tgl { 0% { opacity: 0 } 50%, 100% { opacity: 1 } }
+.sw { position: absolute; left: 50%; top: 44%; width: 58px; height: 28px; transform: translate(-50%, -50%); background: rgba(255,255,255,.9); border-radius: 999px; z-index: 4; }
+.sw::after { content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); animation: knob 3s infinite; }
+@keyframes knob { 0%, 35% { transform: translateX(0) } 50%, 85% { transform: translateX(30px) } 100% { transform: translateX(0) } }
+.mood { position: absolute; inset: 10px 10px 34% 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+.mood i { border-radius: 4px; animation: tile 3.6s infinite; }
+.mood i:nth-child(1) { background: #b48a5e } .mood i:nth-child(2) { background: #d9d3c7; animation-delay: .15s } .mood i:nth-child(3) { background: #6d7a6a; animation-delay: .3s }
+.mood i:nth-child(4) { background: #3e4452; animation-delay: .45s } .mood i:nth-child(5) { background: #c7b59a; animation-delay: .6s } .mood i:nth-child(6) { background: #8e5b46; animation-delay: .75s }
+@keyframes tile { 0% { transform: scale(0) } 12%, 100% { transform: scale(1) } }
+.mood-room { position: absolute; inset: 0; animation: reveal 3.6s infinite steps(1); }
+@keyframes reveal { 0% { opacity: 0 } 70%, 100% { opacity: 1 } }
+.cuts { position: absolute; inset: 0; animation: cut 1.6s infinite steps(1); transform-origin: 50% 35%; }
+@keyframes cut { 0% { transform: scale(1) } 33% { transform: scale(1.22) } 66% { transform: scale(1.08) } }
+.tl { position: absolute; left: 8px; right: 8px; bottom: 22px; height: 16px; background: var(--frame-2); border-radius: 3px; overflow: hidden; z-index: 4; }
+.tl i { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--hi); }
+.tl::after { content: ""; position: absolute; top: 0; bottom: 0; width: 2px; background: #fff; animation: play 4s infinite linear; }
+@keyframes play { from { left: 0 } to { left: 100% } }
+@media (prefers-reduced-motion: reduce) { .frame *, .frame *::after, .frame *::before { animation: none !important } }
+@media (max-width: 460px) { .card { grid-template-columns: 96px 1fr } .frame { width: 96px } .cap { font-size: 9px } }
+/* Specs e prioridades */
+.specs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 16px; }
+.spec { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: grid; gap: 10px; align-content: start; }
+.spec .rank { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+.spec dl { margin: 0; display: grid; gap: 8px; }
+.spec dt { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.spec dd { margin: 0; font-size: 13.5px; }
+.tablewrap { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
+table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 14px; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+tr:last-child td { border-bottom: 0; }
+.pri { font: 600 12px var(--mono); padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.pri.alta { background: var(--accent); color: #fff; }
+.pri.media { background: var(--accent-soft); color: var(--accent); }
+.pri.baixa { border: 1px solid var(--line); color: var(--muted); }
+section { display: grid; gap: 14px; }
+footer { color: var(--muted); font-size: 13px; }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="tc">Radar diário · 22/11/2026 · 10 referências · REF-0001 → REF-0010</div>
+    <h1>Radar de Criativos Graviton</h1>
+    <p class="lead">Técnicas de edição para criativos verticais, com especificações para a biblioteca de estilos do Graviton Video Editor.</p>
+  </header>
+
+  <div class="warn" role="note">
+    <strong>Limitação desta execução: os vídeos não foram assistidos.</strong>
+    <p>A rede da sessão bloqueou youtube.com, vimeo.com, behance.net e tiktok.com. Os links vêm do índice de busca. "Observado" resume apenas título e descrição indexados; a execução visual está marcada como hipótese. Momento no vídeo e criador não foram verificados. As prévias são simulações esquemáticas da técnica, não frames dos vídeos. Nenhum dado de desempenho foi verificado.</p>
+  </div>
+
+  <section>
+    <h2>Galeria</h2>
+    <div class="filters" id="filters" role="group" aria-label="Filtrar por categoria"></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section>
+    <h2>Top 3 do dia: especificações</h2>
+    <div class="specs" id="specs"></div>
+  </section>
+
+  <section>
+    <h2>O que vale implementar no editor</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Prioridade</th><th>Proposta</th><th>Motivo</th><th>Refs</th></tr></thead>
+        <tbody id="prio"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Fila para revisão manual: Meta Ads Library</h2>
+    <p class="lead">Anúncios ativos no Brasil encontrados com "arquitetura de interiores". A API não devolve o vídeo, então ainda não foram analisados.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Página</th><th>Título do link</th><th>Anúncio</th></tr></thead>
+        <tbody id="meta"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>Catálogo central: <code>catalogo/referencias.json</code> no repositório criativos-biblioteca. Nenhuma alteração foi feita no editor em produção.</footer>
+</div>
+
+<script>
+const P = {
+  karaoke: '<div class="face"></div><div class="emo">💡</div><div class="cap k1"><span>ISSO</span> <span>MUDA</span> <span>O</span> <span>JOGO</span></div>',
+  enfase: '<div class="face"></div><div class="cap">CLAREAMENTO EM <span class="em">1 SESSÃO</span></div>',
+  split: '<div class="split"><div><div class="face" style="top:18%;width:38%"></div></div><div class="b"><div class="room"></div></div></div>',
+  pip: '<div class="room"></div><div class="pip"><div class="face"></div></div>',
+  zoom: '<div class="zoom"><div class="face"></div></div><div class="cap">CÂMERA VIVA</div>',
+  toggle: '<div class="before"></div><div class="after"><div class="room"></div></div><div class="sw"></div>',
+  wipe: '<div class="wipe"><div class="before"></div><div class="after"><div class="room"></div></div><div class="divider"></div></div><span class="lbl" style="left:6px">ANTES</span><span class="lbl" style="right:6px">DEPOIS</span>',
+  mood: '<div class="mood"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="mood-room"><div class="room"></div></div>',
+  densidade: '<div class="cuts"><div class="face"></div></div><div class="cap k1"><span>PARE</span> <span>DE</span> <span>PERDER</span> <span>LEAD</span></div>',
+  retencao: '<div class="face"></div><div class="tl"><i style="left:12%"></i><i style="left:30%"></i><i style="left:44%"></i><i style="left:63%"></i><i style="left:81%"></i></div>'
+};
+const REFS = [
+  {id:"REF-0001",cat:"Legendas",prev:"karaoke",tit:"How to highlight captions word by word (automatically)",url:"https://www.youtube.com/watch?v=94gztkz9k_c",tec:"Karaokê automático + emojis animados",obs:"Legendas automáticas no Premiere com a palavra falada destacada em sincronia e emojis animados.",hip:"Destaque usa timestamp por palavra; blocos de 2 a 4 palavras.",dif:"intermediário",nichos:"Marketing, serviços, estética, odontologia",app:"Preset 'Karaokê ativo' com cor configurável e emojis automáticos."},
+  {id:"REF-0002",cat:"Legendas",prev:"enfase",tit:"How to Highlight Words in Captions in Premiere Pro (Viral …)",url:"https://www.youtube.com/watch?v=U3fbSFhQDRY",tec:"Ênfase seletiva de palavras-chave",obs:"Cor, escala ou estilo para palavras de ênfase, sincronizadas com a fala, evitando excesso.",hip:"Só palavras-chave recebem destaque; resto da legenda neutro.",dif:"básico",nichos:"Odontologia, estética, alto padrão, serviços",app:"Camada 'palavra-chave' com no máximo 1 destaque por bloco."},
+  {id:"REF-0003",cat:"Composição",prev:"split",tit:"The BEST WAY to Create VERTICAL SPLIT SCREEN Videos in Premiere Pro CC",url:"https://www.youtube.com/watch?v=XuI8ar0FiQg",tec:"Tela dividida vertical (2 a 5 painéis)",obs:"Tela dividida vertical no Premiere, com variações 4 em 1 e 5 em 1.",hip:"Painéis empilhados com crop 'cover'; falante em cima, B-roll embaixo.",dif:"básico",nichos:"Interiores, reformas, estética, marketing",app:"Layouts Split 50/50, 40/60 e Mosaico 4 com reenquadramento por rosto."},
+  {id:"REF-0004",cat:"Composição",prev:"pip",tit:"How to Add Overlay in CapCut PC",url:"https://www.youtube.com/watch?v=DPGe5ziNrSo",tec:"Picture-in-picture do falante sobre o B-roll",obs:"Vídeo do falante sobreposto a outro material no CapCut PC.",hip:"Serve para falante em janela sobre render, planta ou antes/depois.",dif:"básico",nichos:"Interiores, alto padrão, marketing, odontologia",app:"Layout PiP com posições, formas e versão com recorte de fundo."},
+  {id:"REF-0005",cat:"Animações",prev:"zoom",tit:"DYNAMIC ZOOM Premiere Pro Tutorial",url:"https://www.youtube.com/watch?v=SeMOS1akDAs",tec:"Zoom lento contínuo (dynamic zoom)",obs:"Técnica de keyframes 'Dynamic Zoom' para vídeos de pessoa falando.",hip:"Scale de 100 a 110% por segmento, reiniciando a cada corte.",dif:"básico",nichos:"Todos com falante",app:"Toggle 'Câmera viva' com zoom automático ancorado no rosto."},
+  {id:"REF-0006",cat:"Animações",prev:"toggle",tit:"Before/After Toggle Switch Video Transition Tutorial",url:"https://www.youtube.com/watch?v=NDF3LmYo0YQ",tec:"Toggle animado antes/depois",obs:"Transição 'Before and After Toggle Switch' voltada a Reels.",hip:"Interruptor desliza e, ao cruzar o centro, o vídeo troca para o 'depois'.",dif:"intermediário",nichos:"Reformas, interiores, estética, odontologia",app:"Componente 'Toggle Antes/Depois' com cores da marca e clique opcional."},
+  {id:"REF-0007",cat:"B-roll",prev:"wipe",tit:"Before & After Wipe Transition in Premiere Pro",url:"https://www.youtube.com/watch?v=_nIXhlMM9EY",tec:"Slider/wipe antes e depois",obs:"Slider antes/depois feito com transição de wipe simples.",hip:"Duas camadas alinhadas com máscara animada e linha divisória.",dif:"básico",nichos:"Reformas, interiores, estética, odontologia",app:"Bloco 'Antes/Depois Slider' com direção, pausa no meio e rótulos."},
+  {id:"REF-0008",cat:"B-roll",prev:"mood",tit:"10 Instagram Reel Ideas For Interior Designers",url:"https://www.youtube.com/watch?v=B6XuxGdsI9k",tec:"Moodboard de materiais → ambiente pronto",obs:"Cita antes/depois com transição e segmento de montagem de moodboard.",hip:"Amostras entram no ritmo da música e cortam para o ambiente final.",dif:"intermediário",nichos:"Interiores, alto padrão, reformas",app:"Template 'Moodboard → Ambiente'."},
+  {id:"REF-0009",cat:"Edição completa",prev:"densidade",tit:"Alex Hormozi’s Edit Style Deconstructed (Masterclass)",url:"https://www.youtube.com/watch?v=y60ohM4nr4Y",tec:"Talking head de alta densidade",obs:"Desconstrói o estilo de edição de Hormozi e o raciocínio por trás dele.",hip:"Corte a cada 1 a 3 s, alternância de enquadramento, karaokê, SFX. Fontes secundárias divergem sobre B-roll.",dif:"intermediário",nichos:"Marketing, serviços",app:"Preset 'Alta densidade'."},
+  {id:"REF-0010",cat:"Edição completa",prev:"retencao",tit:"3 Retention Editing Techniques That Keep Viewers Watching",url:"https://www.youtube.com/watch?v=5ds2J1THdbY",tec:"Retenção além do corte rápido",obs:"Três técnicas de retenção; afirma que não é só cortar mais rápido. As técnicas não aparecem no trecho indexado.",hip:"Variação de ritmo e interrupções de padrão; precisa ser confirmado.",dif:"intermediário",nichos:"Todos",app:"Analisador de ritmo: alerta após X s sem mudança visual."}
+];
+const SPECS = [
+  {n:"Antes/Depois Slider",refs:"REF-0007 · variante REF-0006",res:"Linha divisória com alça percorre o quadro e revela o 'depois' sobre o 'antes'.",el:"Mídia antes, mídia depois, linha, alça, rótulos ANTES/DEPOIS.",par:"Direção, duração 0,8–3 s, easing, pausa no meio 0–1 s, cor e espessura da linha, rótulos, variante toggle, SFX de clique.",anim:"clip-path inset 0→50% (ease-out), pausa, 50→100% (ease-in-out); rótulos acompanham o lado dominante.",apl:"Reforma, interiores (render × pronto), estética, odontologia.",tech:"Máscara por camada (FFmpeg overlay + crop animado, ou Canvas/WebGL no preview); alinhamento por homografia (OpenCV)."},
+  {n:"Legenda Karaokê com Ênfase",refs:"REF-0001 + REF-0002",res:"Blocos de 2 a 4 palavras; palavra falada muda de cor; palavras-chave ganham cor da marca, escala e emoji.",el:"Transcrição com timestamp por palavra, estilos ativo e ênfase, trilha de emojis.",par:"Palavras por bloco, fonte, posição, cores base/ativa, fundo da ativa, scale 1.00–1.15, entrada, limite de ênfases, emojis.",anim:"Troca da ativa em ≤ 80 ms; pop do bloco 0.9→1.0 em 120 ms; ênfase com overshoot 1.0→1.18→1.12.",apl:"Todo criativo com falante; ênfase em números, preços e procedimentos.",tech:"ASR com timestamps por palavra (WhisperX), palavras-chave por LLM, render ASS/libass ou Canvas/Remotion."},
+  {n:"Câmera Viva",refs:"REF-0005",res:"Zoom lento por segmento e alternância 100% ↔ 115% nos cortes, simulando câmera em movimento.",el:"Detecção de rosto, lista de cortes, curva de escala.",par:"Intensidade 2–12%, direção, easing, âncora, punch-in em ênfase (on/off, %, duração).",anim:"Scale linear ou ease-in-out no segmento; punch-in de 120–200 ms nas palavras de ênfase.",apl:"Qualquer gravação estática de celular.",tech:"MediaPipe para rosto; FFmpeg zoompan ou scale+crop por expressão; sincronia com a trilha de legenda."}
+];
+const PRIO = [
+  ["alta","Antes/Depois Slider + variante Toggle","Atende reforma, interiores, estética e odontologia; baixa complexidade","0006, 0007"],
+  ["alta","Legenda Karaokê com Ênfase","Base de quase todo criativo com falante","0001, 0002"],
+  ["alta","Câmera Viva (zoom dinâmico)","Melhora gravação estática; simples de implementar","0005"],
+  ["media","Layouts Split e PiP com recorte","Mostra B-roll de projeto sem perder o falante","0003, 0004"],
+  ["media","Template Moodboard → Ambiente","Específico de arquitetura e interiores","0008"],
+  ["baixa","Analisador de ritmo","Depende das outras peças e de calibração","0010"],
+  ["baixa","Preset 'Alta densidade'","Composição dos itens acima; pode não combinar com alto padrão","0009"]
+];
+const META = [
+  ["Alê Brandini Arquitetura","Projeto residencial de alto padrão","4546259412300649"],
+  ["Alê Brandini Arquitetura","Projeto residencial de alto padrão","29247457154916370"],
+  ["Amare Arquitetura","(sem título)","2516114558878354"],
+  ["Christiane Vilela Arquitetura e Interiores","(sem título)","1381904000510415"],
+  ["Bibyana Bernardon | arquitetura.interiores","instagram.com","1614510063760429"],
+  ["aobra.arq","(sem título)","1470630601845070"]
+];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const grid = document.getElementById("grid");
+grid.innerHTML = REFS.map(r => `
+  <article class="card" data-cat="${esc(r.cat)}">
+    <div class="frame" role="img" aria-label="Simulação esquemática: ${esc(r.tec)}">${P[r.prev]}<span class="tag">SIMULAÇÃO</span></div>
+    <div>
+      <div class="meta"><span>${r.id}</span><span class="chip cat">${esc(r.cat)}</span><span class="chip">${esc(r.dif)}</span></div>
+      <h3>${esc(r.tec)}</h3>
+      <a class="link" href="${r.url}" target="_blank" rel="noopener">${esc(r.tit)} ↗</a>
+      <div><div class="label">Observado (título/descrição)</div><p class="obs">${esc(r.obs)}</p></div>
+      <div><div class="label">Hipótese</div><p class="hip">${esc(r.hip)}</p></div>
+      <div class="meta">Momento: não verificado · Nichos: ${esc(r.nichos)}</div>
+      <p class="app"><strong>No Graviton:</strong> ${esc(r.app)}</p>
+    </div>
+  </article>`).join("");
+const cats = ["Todas", ...new Set(REFS.map(r => r.cat))];
+const fl = document.getElementById("filters");
+fl.innerHTML = cats.map((c, i) => `<button type="button" id="f-${i}" aria-pressed="${i === 0}">${esc(c)}</button>`).join("");
+fl.addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  fl.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b));
+  const c = b.textContent;
+  grid.querySelectorAll(".card").forEach(card => { card.hidden = !(c === "Todas" || card.dataset.cat === c); });
+});
+document.getElementById("specs").innerHTML = SPECS.map((s, i) => `
+  <article class="spec">
+    <div class="rank">#${i + 1} · ${esc(s.refs)}</div>
+    <h3>${esc(s.n)}</h3>
+    <dl>
+      <dt>Resultado visual</dt><dd>${esc(s.res)}</dd>
+      <dt>Elementos</dt><dd>${esc(s.el)}</dd>
+      <dt>Parâmetros</dt><dd>${esc(s.par)}</dd>
+      <dt>Animação</dt><dd>${esc(s.anim)}</dd>
+      <dt>Aplicações</dt><dd>${esc(s.apl)}</dd>
+      <dt>Tecnologia</dt><dd>${esc(s.tech)}</dd>
+    </dl>
+  </article>`).join("");
+const pl = {alta:"Alta", media:"Média", baixa:"Baixa"};
+document.getElementById("prio").innerHTML = PRIO.map(p => `<tr><td><span class="pri ${p[0]}">${pl[p[0]]}</span></td><td>${esc(p[1])}</td><td>${esc(p[2])}</td><td style="font-family:var(--mono);font-size:12px">${p[3]}</td></tr>`).join("");
+document.getElementById("meta").innerHTML = META.map(m => `<tr><td>${esc(m[0])}</td><td>${esc(m[1])}</td><td><a class="link" style="color:var(--accent)" href="https://www.facebook.com/ads/library/?id=${m[2]}" target="_blank" rel="noopener">${m[2]} ↗</a></td></tr>`).join("");
+</script>
