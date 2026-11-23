@@ -1,0 +1,223 @@
+<title>Radar de Criativos 23/11</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: mesa de edição — cabeçalho curto, filtros por categoria, grade de cards com "monitor" 9:16 animado à esquerda de cada ficha */
+:root{
+  --bg:#f3f3f6; --surface:#ffffff; --ink:#15161d; --muted:#5d6072; --line:#dcdde6;
+  --accent:#3b4ef0; --accent-soft:#e6e8ff; --screen:#1b1d2b; --screen-ink:#f2f3ff; --hi:#ffd23f;
+  --ok:#1f8a57; --warn:#a86400;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#101118; --surface:#191a24; --ink:#ececf3; --muted:#a1a3b5; --line:#2c2e3d;
+  --accent:#8c98ff; --accent-soft:#252a52; --screen:#07080d; --screen-ink:#f2f3ff; --hi:#ffd23f;
+  --ok:#5fd39a; --warn:#f0b35a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#101118; --surface:#191a24; --ink:#ececf3; --muted:#a1a3b5; --line:#2c2e3d;
+  --accent:#8c98ff; --accent-soft:#252a52; --screen:#07080d; --screen-ink:#f2f3ff; --hi:#ffd23f;
+  --ok:#5fd39a; --warn:#f0b35a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+header{display:flex;flex-direction:column;gap:10px}
+.eyebrow{font:500 12px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+h1{font:800 clamp(30px,5vw,48px)/1.05 var(--f-display);margin:0;text-wrap:balance}
+h2{font:700 24px/1.2 var(--f-display);margin:0;text-wrap:balance}
+h3{font:600 17px/1.3 var(--f-body);margin:0;text-wrap:balance}
+.lede{max-width:68ch;color:var(--muted);margin:0}
+.notice{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:14px 16px;max-width:80ch;font-size:14px;color:var(--muted)}
+.notice b{color:var(--ink)}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.filters button{font:500 13px var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 12px;border-radius:999px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.filters button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,520px),1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px}
+@media (max-width:460px){.card{grid-template-columns:1fr}.mon{width:120px}}
+.meta{display:flex;flex-direction:column;gap:8px;min-width:0}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font:500 11px/1 var(--f-mono);letter-spacing:.04em;padding:5px 7px;border-radius:5px;background:var(--accent-soft);color:var(--ink)}
+.tag.lvl{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.tech{font:500 13px var(--f-mono);color:var(--accent)}
+.card p{margin:0;font-size:14px}
+.k{font:500 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:2px}
+.src{font:400 12px var(--f-mono);color:var(--muted);overflow-wrap:anywhere}
+a{color:var(--accent)}
+.note{font-size:12px;color:var(--warn)}
+/* monitor 9:16 */
+.mon{width:100%;max-width:120px;aspect-ratio:9/16;background:var(--screen);border-radius:10px;position:relative;overflow:hidden;color:var(--screen-ink);align-self:start}
+.mon .lbl{position:absolute;left:6px;top:6px;font:500 9px var(--f-mono);opacity:.6;letter-spacing:.06em}
+.mon .person{position:absolute;left:50%;bottom:0;width:58%;height:52%;transform:translateX(-50%);background:linear-gradient(#c9cdf7,#9aa2ec);border-radius:50% 50% 8px 8px / 30% 30% 8px 8px}
+.mon .person::before{content:"";position:absolute;left:50%;top:-34%;width:52%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:#dfe2ff}
+.cap{position:absolute;left:0;right:0;bottom:22%;text-align:center;font:800 13px/1.1 var(--f-display);text-transform:uppercase;text-shadow:0 0 2px #000,0 1px 4px #000,0 0 8px rgba(0,0,0,.7)}
+.cap span{display:inline-block}
+/* 01 wordpop */
+.d-wordpop .cap span{opacity:0;animation:soft 3s infinite}
+.d-wordpop .cap span:nth-child(2){animation-delay:.35s}.d-wordpop .cap span:nth-child(3){animation-delay:.7s}
+@keyframes soft{0%{opacity:0;transform:scale(.85)}8%,80%{opacity:1;transform:scale(1)}100%{opacity:0}}
+/* 02 karaoke */
+.d-karaoke .cap span{animation:kar 2.4s infinite;color:var(--screen-ink)}
+.d-karaoke .cap span:nth-child(2){animation-delay:.6s}.d-karaoke .cap span:nth-child(3){animation-delay:1.2s}
+@keyframes kar{0%,24%{color:var(--hi);transform:scale(1.08)}25%,100%{color:var(--screen-ink);transform:scale(1)}}
+/* 03 grid */
+.d-grid .cells{position:absolute;inset:0;display:grid;grid-template:repeat(4,1fr)/repeat(2,1fr)}
+.d-grid .cells i{background:linear-gradient(135deg,#6f7cf5,#3640a8);animation:cell 3s infinite;border:1px solid var(--screen)}
+.d-grid .cells i:nth-child(even){background:linear-gradient(135deg,#f5a96f,#a85a36)}
+.d-grid .cells i:nth-child(2){animation-delay:.06s}.d-grid .cells i:nth-child(3){animation-delay:.12s}.d-grid .cells i:nth-child(4){animation-delay:.18s}
+.d-grid .cells i:nth-child(5){animation-delay:.24s}.d-grid .cells i:nth-child(6){animation-delay:.3s}.d-grid .cells i:nth-child(7){animation-delay:.36s}.d-grid .cells i:nth-child(8){animation-delay:.42s}
+@keyframes cell{0%,30%{transform:scale(1)}45%{transform:scale(0)}60%,100%{transform:scale(1)}}
+/* 04 cutout */
+.d-cutout{background:linear-gradient(160deg,#3a5a7a,#1e2c3c)}
+.d-cutout .plan{position:absolute;inset:14% 10% 40%;border:1px dashed #9fc3e6;opacity:.8}
+.d-cutout .plan::after{content:"";position:absolute;inset:30% 40% 0 0;border-right:1px dashed #9fc3e6;border-top:1px dashed #9fc3e6}
+.d-cutout .person{width:48%;height:42%;left:70%;filter:drop-shadow(0 0 4px #000)}
+/* 05 easezoom */
+.d-easezoom .scene{position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,#5865d8,#1b1d2b 70%);animation:ez 3s cubic-bezier(.65,0,.35,1) infinite alternate}
+.d-easezoom .person{animation:ez 3s cubic-bezier(.65,0,.35,1) infinite alternate;transform-origin:50% 0}
+@keyframes ez{from{transform:translateX(-50%) scale(1)}to{transform:translateX(-50%) scale(1.3)}}
+.d-easezoom .scene{animation-name:ez2}@keyframes ez2{from{transform:scale(1)}to{transform:scale(1.3)}}
+/* 06 whip */
+.d-whip .strip{position:absolute;inset:0;display:flex;width:200%;animation:whip 2.6s infinite}
+.d-whip .strip i{flex:1;background:linear-gradient(#c7b190,#7a6347)}.d-whip .strip i+i{background:linear-gradient(#90b3c7,#47627a)}
+@keyframes whip{0%,40%{transform:translateX(0);filter:blur(0)}50%{filter:blur(6px)}60%,100%{transform:translateX(-50%);filter:blur(0)}}
+/* 07 daynight */
+.d-daynight .sky{position:absolute;inset:0;background:linear-gradient(#8fd0ff,#e8f4ff);animation:dn 4s infinite alternate}
+@keyframes dn{0%,25%{background:linear-gradient(#8fd0ff,#e8f4ff)}75%,100%{background:linear-gradient(#0b1030,#2b2f5e)}}
+.d-daynight .house{position:absolute;left:15%;right:15%;bottom:18%;height:28%;background:#4a4f63}
+.d-daynight .house::before{content:"";position:absolute;left:12%;right:12%;top:30%;height:30%;background:#ffd88a;animation:win 4s infinite alternate}
+@keyframes win{0%,40%{opacity:.15}75%,100%{opacity:1}}
+/* 08 broll */
+.d-broll .shot{position:absolute;inset:0;opacity:0;animation:shot 4.5s infinite}
+.d-broll .shot:nth-child(2){animation-delay:1.5s}.d-broll .shot:nth-child(3){animation-delay:3s}
+.d-broll .s1{background:linear-gradient(#9ec7e0 40%,#5c7a4a 40%)}
+.d-broll .s2{background:linear-gradient(90deg,#e8dccb 60%,#8a6f55 60%)}
+.d-broll .s3{background:repeating-linear-gradient(45deg,#cbb79a 0 6px,#a8916f 6px 12px)}
+@keyframes shot{0%{opacity:1;transform:scale(1)}33%{opacity:1;transform:scale(1.12)}34%,100%{opacity:0}}
+/* 09/10 timeline */
+.tl{position:absolute;left:8%;right:8%;bottom:8%;height:18%;display:flex;gap:2px;align-items:stretch}
+.tl i{background:#5865d8;border-radius:2px}.tl i.b{background:#f5a96f}.tl i.g{background:var(--hi)}
+.d-rhythm .person,.d-fulledit .person{height:40%;bottom:30%;animation:jc 2.4s steps(1) infinite}
+@keyframes jc{0%{transform:translateX(-50%) scale(1)}33%{transform:translateX(-50%) scale(1.15)}66%{transform:translateX(-50%) scale(1)}}
+.head{position:absolute;top:0;bottom:0;width:2px;background:#fff;left:0;animation:play 4s linear infinite}
+@keyframes play{to{left:100%}}
+@media (prefers-reduced-motion:reduce){.mon *,.mon{animation:none!important}}
+section.specs{display:flex;flex-direction:column;gap:14px}
+.spec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:14px}
+.spec{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.spec dl{margin:0;display:grid;gap:6px}
+.spec dt{font:500 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.spec dd{margin:0;font-size:14px}
+.prio{width:100%;border-collapse:collapse;font-size:14px}
+.prio th,.prio td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.prio th{font:500 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.pill{font:600 11px var(--f-mono);padding:3px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.p-alta{color:var(--accent)}.p-media{color:var(--warn)}.p-baixa{color:var(--muted)}
+.tablebox{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+footer{font-size:13px;color:var(--muted)}
+</style>
+
+<div class="wrap">
+<header>
+  <span class="eyebrow">Graviton Video Editor · Radar diário</span>
+  <h1>Radar de Criativos — 23/11/2026</h1>
+  <p class="lede">10 referências de edição para Reels e anúncios Meta, 2 por categoria. Catálogo central agora com 115 referências únicas.</p>
+  <div class="notice"><b>Prévias ilustrativas.</b> Os monitores animados reproduzem o efeito descrito em cada referência; não são capturas dos vídeos. YouTube, Vimeo e VideoHive estavam bloqueados na rede desta execução, então as fichas se baseiam em título, URL e trechos do índice de busca. Nenhum vídeo foi assistido e nenhum dado de desempenho é afirmado.</div>
+</header>
+
+<nav class="filters" aria-label="Filtrar por categoria" id="filters"></nav>
+<main class="grid" id="grid"></main>
+
+<section class="specs">
+  <h2>Top 3 técnicas do dia: especificação</h2>
+  <div class="spec-grid">
+    <article class="spec"><h3>1. Transição Mosaico</h3><dl>
+      <dt>Resultado</dt><dd>O quadro se parte em células que encolhem/deslizam em cascata e revelam a próxima mídia pela mesma grade.</dd>
+      <dt>Elementos</dt><dd>Mídia A, mídia B, grade N×M, máscara por célula.</dd>
+      <dt>Parâmetros</dt><dd>colunas (2–4), linhas (3–6), ordem (linha, diagonal, centro→borda, aleatória), atraso por célula (20–60 ms), movimento (escala, slide, flip), gap e raio, duração total (0,4–1 s).</dd>
+      <dt>Animação</dt><dd>Cada célula recorta sua fatia de A e sai com ease-in; B entra com ease-out na ordem escolhida.</dd>
+      <dt>Aplicações</dt><dd>Portfólio de arquitetura, sequências de casos de estética e odontologia, carrossel de projetos.</dd>
+      <dt>Tecnologia</dt><dd>Canvas/WebGL (shader de grade) ou Remotion/React com clip-path por célula; FFmpeg só com filtros complexos (crop+overlay por célula).</dd></dl></article>
+    <article class="spec"><h3>2. Zoom com curva de easing</h3><dl>
+      <dt>Resultado</dt><dd>Push-in ou punch-in com aceleração e assentamento controlados, sem o aspecto linear "robótico".</dd>
+      <dt>Elementos</dt><dd>Clipe, ponto de âncora (rosto ou ponto manual), keyframes de escala/posição.</dd>
+      <dt>Parâmetros</dt><dd>escala inicial/final (1.0–1.4), duração, preset de curva (Suave, Punch, Lento→Rápido, Elástico) ou cubic-bezier livre, âncora com rastreamento facial on/off.</dd>
+      <dt>Animação</dt><dd>Interpolação por cubic-bezier; Punch = 3–5 frames com overshoot de 2%; Suave = 1–3 s ease-in-out.</dd>
+      <dt>Aplicações</dt><dd>Todos os nichos; ênfase em frases-chave e revelações de resultado.</dd>
+      <dt>Tecnologia</dt><dd>Motor de keyframes com curvas bezier; detecção facial (MediaPipe) para âncora; FFmpeg zoompan com expressão ou render via WebGL.</dd></dl></article>
+    <article class="spec"><h3>3. Transição Dia → Noite</h3><dl>
+      <dt>Resultado</dt><dd>A mesma fachada ou render passa do dia para a noite, com luzes acendendo primeiro nas áreas iluminadas.</dd>
+      <dt>Elementos</dt><dd>Duas imagens alinhadas do mesmo ponto de vista (foto ou render dia/noite).</dd>
+      <dt>Parâmetros</dt><dd>direção da luma (claro→escuro ou inverso), suavidade da borda (5–30%), duração (0,8–3 s), alinhamento automático on/off, brilho extra nas janelas.</dd>
+      <dt>Animação</dt><dd>O limiar de luminância avança de 0 a 1; pixels abaixo do limiar mostram B. Opcional: glow aditivo curto nas regiões de maior ganho de brilho.</dd>
+      <dt>Aplicações</dt><dd>Arquitetura de alto padrão, paisagismo, incorporadoras, iluminação de interiores.</dd>
+      <dt>Tecnologia</dt><dd>Shader de luma matte (GLSL) ou FFmpeg maskedmerge com máscara gerada de A; alinhamento por homografia (OpenCV) quando as tomadas não coincidem.</dd></dl></article>
+  </div>
+</section>
+
+<section class="specs">
+  <h2>O que vale implementar no editor</h2>
+  <div class="tablebox"><table class="prio">
+    <thead><tr><th>Prioridade</th><th>Proposta</th><th>Por quê</th></tr></thead>
+    <tbody>
+      <tr><td><span class="pill p-alta">alta</span></td><td>Curvas de easing nomeadas em todos os zooms</td><td>Baixo custo, afeta todo criativo; base para punch-in e push-in já catalogados.</td></tr>
+      <tr><td><span class="pill p-alta">alta</span></td><td>Transição Mosaico (grade animada)</td><td>Novo no catálogo; serve portfólios de arquitetura, estética e odontologia.</td></tr>
+      <tr><td><span class="pill p-alta">alta</span></td><td>Transição Dia → Noite (luma matte)</td><td>Diferencial para o nicho de arquitetura de alto padrão.</td></tr>
+      <tr><td><span class="pill p-media">média</span></td><td>Layout "Apresentador sobre projeto" (recorte por IA)</td><td>Exige modelo de segmentação; alto valor para arquitetos e dentistas comentando material.</td></tr>
+      <tr><td><span class="pill p-media">média</span></td><td>Transição Chicote com blur direcional + whoosh</td><td>Tour de ambientes em reformas e imóveis.</td></tr>
+      <tr><td><span class="pill p-media">média</span></td><td>Preset de legenda "Entrada suave" (sem overshoot)</td><td>Opção premium ao lado do pop e do karaokê.</td></tr>
+      <tr><td><span class="pill p-baixa">baixa</span></td><td>Template "Sequência de apoio 3 planos" (aberto → médio → detalhe)</td><td>Pode ser montado com recursos existentes; útil como atalho.</td></tr>
+      <tr><td><span class="pill p-baixa">baixa</span></td><td>Medidor de ritmo (trechos sem mudança visual > 4 s)</td><td>Ferramenta de análise; depende de detecção de cortes e eventos.</td></tr>
+    </tbody></table></div>
+</section>
+<footer>Fonte de dados: radar/2026-11-23/referencias.json · Catálogo: catalogo/catalogo-central.csv (repositório criativos-biblioteca). Nada foi alterado no editor em produção.</footer>
+</div>
+
+<script>
+const REFS = [{"id": "2026-11-23-01", "data_descoberta": "2026-11-23", "demo": "wordpop", "titulo": "How To Animate Smooth Word by Word Captions in Premiere Pro", "url": "https://www.youtube.com/watch?v=qJ7_9-LhZvk", "plataforma": "YouTube", "criador": "Canal não confirmado (página não acessível nesta sessão)", "categoria": "Legendas", "tecnica": "Legenda palavra a palavra com entrada suave (escala + opacidade)", "observado": "Título indexado: tutorial de legendas palavra a palavra com animação 'suave' no Premiere Pro.", "hipotese": "Provável uso de captions geradas por transcrição, quebradas em 1 palavra por bloco, com keyframes de escala (≈80%→100%) e opacidade em 3–6 frames, ou preset de Essential Graphics.", "momento": "Não verificado (vídeo não assistido)", "reproducao": "Transcrever com timestamps por palavra; renderizar cada palavra ao entrar com scale 0.85→1.0 e opacity 0→1 em ~120 ms, easing ease-out; manter a palavra anterior visível até fechar a linha.", "dificuldade": "intermediário", "nicho": ["Marketing e negócios", "Serviços profissionais", "Estética facial e corporal"], "aplicacao": "Preset 'Entrada suave' na biblioteca de legendas, alternativa menos agressiva ao pop com overshoot, para nichos premium.", "novidade": "Variação de legendas palavra a palavra já catalogadas (e6ZloD-aINE, 94gztkz9k_c); diferença: entrada suave sem overshoot.", "verificacao": "Índice de busca (título + URL); vídeo não assistido", "status_implementacao": "não iniciado"}, {"id": "2026-11-23-02", "data_descoberta": "2026-11-23", "demo": "karaoke", "titulo": "How To Make the NEW Word by Word Subtitles For Davinci Resolve 20", "url": "https://www.youtube.com/watch?v=rofYLH0lEfw", "plataforma": "YouTube", "criador": "Canal não confirmado", "categoria": "Legendas", "tecnica": "Animação nativa palavra a palavra em legendas (DaVinci Resolve 20)", "observado": "Título e trecho indexados: no Resolve 20 'agora é possível animar [as legendas] palavra a palavra'.", "hipotese": "Recurso de legendas animadas do Resolve 20 sobre transcrição automática, com estilo por palavra ativa (cor/escala). Detalhes de parâmetros não confirmados.", "momento": "Não verificado", "reproducao": "Linha completa visível; a palavra ativa recebe cor de destaque e leve escala (1.0→1.08) sincronizada ao timestamp; palavras já faladas mantêm a cor base.", "dificuldade": "básico", "nicho": ["Odontologia", "Serviços profissionais", "Marketing e negócios"], "aplicacao": "Referência de comportamento 'linha completa + palavra ativa' (karaokê) para comparar com o modo 1 palavra por vez.", "novidade": "Variação de karaokê já catalogado; novo é o fluxo nativo no Resolve 20 (benchmark de ferramenta concorrente).", "verificacao": "Índice de busca (título + trecho); vídeo não assistido", "status_implementacao": "não iniciado"}, {"id": "2026-11-23-03", "data_descoberta": "2026-11-23", "demo": "grid", "titulo": "Grid Media Transitions (DaVinci Resolve Templates)", "url": "https://videohive.net/item/grid-media-transitions/53165772", "plataforma": "VideoHive", "criador": "LLmotiongraphics (segundo o índice de busca)", "categoria": "Composição", "tecnica": "Mosaico/grade animada como transição entre mídias", "observado": "Trecho indexado: kit com 12 transições em mosaico para DaVinci Resolve, compatível com resoluções padrão, widescreen e vertical (Instagram/TikTok).", "hipotese": "A imagem é dividida em células que deslizam/escalam em sequência escalonada, revelando a próxima mídia; cada célula provavelmente é um recorte da mesma imagem.", "momento": "Não verificado (prévia do item não acessada)", "reproducao": "Dividir o quadro em N×M células; cada célula recorta a mídia A e anima translate/scale para fora com delay escalonado (ex.: 30 ms por célula) enquanto a mídia B entra pela mesma grade.", "dificuldade": "intermediário", "nicho": ["Arquitetura e interiores", "Arquitetura de alto padrão", "Reformas residenciais", "Estética facial e corporal"], "aplicacao": "Transição 'Mosaico' para sequências de fotos de projeto e portfólio de casos.", "novidade": "Nova técnica no catálogo (mosaicos estáticos já existiam; transição em grade não).", "verificacao": "Índice de busca (descrição do vendedor); prévia não assistida", "status_implementacao": "não iniciado"}, {"id": "2026-11-23-04", "data_descoberta": "2026-11-23", "demo": "cutout", "titulo": "How to make the BEST GREEN SCREEN REEL on Instagram", "url": "https://www.youtube.com/watch?v=vBHWw1qkc7A", "plataforma": "YouTube", "criador": "Canal não confirmado", "categoria": "Composição", "tecnica": "Apresentador recortado sobre material de apoio (green screen do Reels)", "observado": "Título indexado: tutorial de Reels com efeito green screen do Instagram.", "hipotese": "Usa o efeito nativo de remoção de fundo do Instagram, colocando a pessoa sobre uma foto/vídeo da galeria (print, render, antes/depois).", "momento": "Não verificado", "reproducao": "Segmentar a pessoa (matting por IA), posicioná-la no terço inferior com escala 60–80%, e usar a mídia de apoio em tela cheia ao fundo; opcional sombra/contorno sutil para separar.", "dificuldade": "intermediário", "nicho": ["Arquitetura e interiores", "Reformas residenciais", "Odontologia", "Marketing e negócios"], "aplicacao": "Layout 'Apresentador sobre projeto': o arquiteto comenta a planta/render que ocupa o fundo.", "novidade": "Variação de picture-in-picture já catalogado; novo é o recorte sem caixa.", "verificacao": "Índice de busca (título); vídeo não assistido", "status_implementacao": "não iniciado"}, {"id": "2026-11-23-05", "data_descoberta": "2026-11-23", "demo": "easezoom", "titulo": "Smooth zoom in effect using Keyframe+graph tutorial in capcut", "url": "https://www.youtube.com/shorts/4-yPwoMTzAE", "plataforma": "YouTube Shorts", "criador": "Canal não confirmado", "categoria": "Animações e transições", "tecnica": "Zoom com keyframes + curva de velocidade (graph)", "observado": "Título e trecho indexados: zoom suave usando keyframes e o editor de curvas do CapCut.", "hipotese": "Keyframes de escala com curva ease-in-out aplicada no gráfico, produzindo aceleração no início e assentamento no final.", "momento": "Não verificado", "reproducao": "Interpolar escala 1.0→1.25 com curva cubic-bezier configurável (presets: suave, punch, lento-rápido); ancorar no rosto ou em ponto de interesse.", "dificuldade": "básico", "nicho": ["Todos os nichos"], "aplicacao": "Expor curvas de easing nomeadas em todos os zooms do editor.", "novidade": "Variação de zooms já catalogados (SeMOS1akDAs, r7rAnzLXklg); novo é o controle de curva.", "verificacao": "Índice de busca (título + trecho); vídeo não assistido", "status_implementacao": "não iniciado"}, {"id": "2026-11-23-06", "data_descoberta": "2026-11-23", "demo": "whip", "titulo": "3 Motion Transitions For Real Estate Videos (DaVinci Resolve)", "url": "https://www.youtube.com/watch?v=6e4ilZo1cQY", "plataforma": "YouTube", "criador": "Canal não confirmado", "categoria": "Animações e transições", "tecnica": "Transições de movimento para imóveis, incluindo whip (chicote)", "observado": "Título e trecho indexados: três transições de movimento para vídeos imobiliários no Resolve; uma delas é whip.", "hipotese": "Whip = deslocamento horizontal rápido com motion blur direcional casado entre o fim do clipe A e o início do B; as outras duas não identificadas.", "momento": "Não verificado", "reproducao": "Nos últimos 4–6 frames de A e primeiros de B, animar translateX ±100% com blur direcional crescente/decrescente; adicionar 'whoosh' sincronizado.", "dificuldade": "intermediário", "nicho": ["Arquitetura e interiores", "Arquitetura de alto padrão", "Reformas residenciais"], "aplicacao": "Transição 'Chicote' para passar de ambiente em ambiente no tour.", "novidade": "Nova no catálogo para o nicho imobiliário (transições AE de imóveis já catalogadas em et1g5t3jHxM, mas não whip em Resolve).", "verificacao": "Índice de busca (título + trecho); vídeo não assistido", "status_implementacao": "não iniciado"}, {"id": "2026-11-23-07", "data_descoberta": "2026-11-23", "demo": "daynight", "titulo": "The EASIEST Way to Create Day to Night Transitions", "url": "https://www.youtube.com/watch?v=zO1LJ3mWY1Y", "plataforma": "YouTube", "criador": "Canal não confirmado", "categoria": "B-roll e materiais complementares", "tecnica": "Transição dia→noite em fachada (mesmo enquadramento)", "observado": "Título indexado. A busca retornou dois tutoriais de mesmo título (este e TYRunj7jg20); um deles usa luma fade no Resolve, sem confirmação de qual.", "hipotese": "Dois planos fixos (tripé/drone em hover) do mesmo ângulo, dia e noite, unidos por luma fade: áreas claras ou escuras transicionam primeiro.", "momento": "Não verificado", "reproducao": "Alinhar duas imagens do mesmo ponto de vista; transição por máscara de luminância (limiar animado 0→1, suavização 10–20%) em 1–2 s.", "dificuldade": "intermediário", "nicho": ["Arquitetura de alto padrão", "Arquitetura e interiores"], "aplicacao": "Transição 'Dia → Noite' para fachadas, paisagismo e renders (versões dia/noite do mesmo render).", "novidade": "Nova técnica no catálogo.", "verificacao": "Índice de busca (título); vídeo não assistido", "status_implementacao": "não iniciado"}, {"id": "2026-11-23-08", "data_descoberta": "2026-11-23", "demo": "broll", "titulo": "Real Estate Reel", "url": "https://vimeo.com/1131570411", "plataforma": "Vimeo", "criador": "Reactive Media (segundo o índice de busca)", "categoria": "B-roll e materiais complementares", "tecnica": "B-roll arquitetônico: drone + luz natural + detalhes", "observado": "Trecho indexado: reel que combina cinematografia de drone, luz natural e visuais orientados ao design, com foco em detalhes arquitetônicos.", "hipotese": "Estrutura de planos aberto (drone) → médio (ambiente) → detalhe (acabamento), com movimentos lentos e cortes no ritmo da trilha.", "momento": "Não verificado", "reproducao": "No editor: modelo de sequência B-roll com 3 slots (aberto, médio, detalhe), duração 1,2–2 s por plano e leve push-in automático em cada slot.", "dificuldade": "básico", "nicho": ["Arquitetura de alto padrão", "Arquitetura e interiores", "Reformas residenciais"], "aplicacao": "Template 'Sequência de apoio 3 planos' para intercalar com a fala do profissional.", "novidade": "Nova referência; reforça padrão aberto→detalhe já visto em tours (Upwork luxury listing).", "verificacao": "Índice de busca (descrição); vídeo não assistido", "status_implementacao": "não iniciado"}, {"id": "2026-11-23-09", "data_descoberta": "2026-11-23", "demo": "rhythm", "titulo": "The Psychology of Video Editing", "url": "https://www.youtube.com/watch?v=QE7NxZTzviM", "plataforma": "YouTube", "criador": "Canal não confirmado", "categoria": "Edição completa", "tecnica": "Kit de retenção: cortar excesso, jump cuts, pattern interrupts, zooms, elementos na tela", "observado": "Trecho indexado lista: 'cutting the fluff, jump cuts, pattern interrupts, zooms, on-scre[en ...]' (texto truncado).", "hipotese": "Pattern interrupt = mudança visual (zoom, B-roll, gráfico, som) a cada poucos segundos para reiniciar a atenção.", "momento": "Não verificado", "reproducao": "Regra de edição: remover silêncios > 300 ms; inserir uma mudança de enquadramento ou elemento a cada 2–4 s; alternar zoom 100%/115% entre cortes de jump cut.", "dificuldade": "intermediário", "nicho": ["Marketing e negócios", "Serviços profissionais", "Todos os nichos"], "aplicacao": "Base para um 'medidor de ritmo' que aponta trechos sem mudança visual.", "novidade": "Variação de técnicas de retenção já catalogadas (5ds2J1THdbY); novo é o enquadramento como pattern interrupt.", "verificacao": "Índice de busca (trecho truncado); vídeo não assistido", "status_implementacao": "não iniciado"}, {"id": "2026-11-23-10", "data_descoberta": "2026-11-23", "demo": "fulledit", "titulo": "How to Edit a Real Estate Video Like a PRO!", "url": "https://www.youtube.com/watch?v=E13fKS24R5E", "plataforma": "YouTube", "criador": "Canal não confirmado", "categoria": "Edição completa", "tecnica": "Fluxo completo de edição de vídeo imobiliário", "observado": "Título indexado. Conteúdo, duração e software não confirmados.", "hipotese": "Provável sequência: seleção de planos, cortes na batida, correção de cor, transições de movimento e música.", "momento": "Não verificado", "reproducao": "Usar como checklist de estrutura (abertura forte, tour por ambientes, detalhe, encerramento com CTA) quando o vídeo for assistido.", "dificuldade": "intermediário", "nicho": ["Arquitetura e interiores", "Reformas residenciais", "Arquitetura de alto padrão"], "aplicacao": "Referência para um template de edição completa 'Tour de imóvel'.", "novidade": "Nova referência; complementa Xdq22d85fPY (masterclass realtor) já catalogado.", "verificacao": "Índice de busca (título); vídeo não assistido", "status_implementacao": "não iniciado"}];
+const DEMO = {
+  wordpop:'<div class="person"></div><div class="cap"><span>SEU&nbsp;</span><span>PROJETO&nbsp;</span><span>PRONTO</span></div>',
+  karaoke:'<div class="person"></div><div class="cap"><span>SORRISO&nbsp;</span><span>EM&nbsp;</span><span>7 DIAS</span></div>',
+  grid:'<div class="cells">'+'<i></i>'.repeat(8)+'</div>',
+  cutout:'<div class="plan"></div><div class="person"></div>',
+  easezoom:'<div class="scene"></div><div class="person"></div>',
+  whip:'<div class="strip"><i></i><i></i></div>',
+  daynight:'<div class="sky"></div><div class="house"></div>',
+  broll:'<div class="shot s1"></div><div class="shot s2"></div><div class="shot s3"></div>',
+  rhythm:'<div class="person"></div><div class="tl"><i style="flex:2"></i><i class="b" style="flex:1"></i><i style="flex:2"></i><i class="g" style="flex:.6"></i><i style="flex:1.5"></i><i class="b" style="flex:1"></i><span class="head"></span></div>',
+  fulledit:'<div class="person"></div><div class="tl"><i class="b" style="flex:1.2"></i><i style="flex:1"></i><i class="b" style="flex:2"></i><i class="b" style="flex:1"></i><i class="g" style="flex:.8"></i><span class="head"></span></div>'
+};
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const cats = ['Todas', ...new Set(REFS.map(r => r.categoria))];
+let current = 'Todas';
+try { const s = localStorage.getItem('radar-cat'); if (s && cats.includes(s)) current = s; } catch(e) {}
+function render(){
+  document.getElementById('filters').innerHTML = cats.map(c => `<button type="button" aria-pressed="${c===current}" data-c="${esc(c)}">${esc(c)}</button>`).join('');
+  document.getElementById('grid').innerHTML = REFS.filter(r => current==='Todas' || r.categoria===current).map(r => `
+  <article class="card">
+    <div class="mon d-${r.demo}" role="img" aria-label="Prévia ilustrativa: ${esc(r.tecnica)}"><span class="lbl">ILUSTRATIVO</span>${DEMO[r.demo]||''}</div>
+    <div class="meta">
+      <div class="tags"><span class="tag">${esc(r.categoria)}</span><span class="tag lvl">${esc(r.dificuldade)}</span></div>
+      <h3>${esc(r.titulo)}</h3>
+      <span class="tech">${esc(r.tecnica)}</span>
+      <p><span class="k">Observado</span>${esc(r.observado)}</p>
+      <p><span class="k">Hipótese de técnica</span>${esc(r.hipotese)}</p>
+      <p><span class="k">Como reproduzir</span>${esc(r.reproducao)}</p>
+      <p><span class="k">Aplicação no editor</span>${esc(r.aplicacao)}</p>
+      <p><span class="k">Nichos</span>${esc(r.nicho.join(', '))}</p>
+      <span class="src">${esc(r.criador)} · <a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.url)}</a></span>
+      <span class="note">${esc(r.verificacao)} · Momento: ${esc(r.momento)}</span>
+    </div>
+  </article>`).join('');
+}
+document.getElementById('filters').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  current = b.dataset.c; try { localStorage.setItem('radar-cat', current); } catch(e) {}
+  render();
+});
+render();
+</script>

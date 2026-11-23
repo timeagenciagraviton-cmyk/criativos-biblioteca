@@ -1,0 +1,217 @@
+<title>Radar Graviton 19/11</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: mesa de edição — cabeçalho com régua de timecode, grade de cards com monitor 9:16 à esquerda e ficha técnica à direita */
+:root{
+  --bg:#F3F5F7; --panel:#FFFFFF; --ink:#16202A; --muted:#5B6773; --line:#D9DFE5;
+  --accent:#0B7A85; --accent-2:#C77A12; --screen:#1C2630; --screen-2:#2E3D4B; --on-screen:#F4F7FA;
+  --ok:#2F7D4F; --warn:#A8640A; --hard:#A33A3A;
+  --f-display:"Familjen Grotesk","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#10161C; --panel:#18212A; --ink:#E6ECF1; --muted:#97A4B0; --line:#2A3743;
+  --accent:#3CC0CC; --accent-2:#E6A24A; --screen:#0A0F14; --screen-2:#24313D; --on-screen:#F4F7FA;
+  --ok:#5BC189; --warn:#E6A24A; --hard:#E07B7B; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10161C; --panel:#18212A; --ink:#E6ECF1; --muted:#97A4B0; --line:#2A3743;
+  --accent:#3CC0CC; --accent-2:#E6A24A; --screen:#0A0F14; --screen-2:#24313D; --on-screen:#F4F7FA;
+  --ok:#5BC189; --warn:#E6A24A; --hard:#E07B7B; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-body)}
+.wrap{max-width:1180px;margin:0 auto;padding-block:32px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:36px}
+header{display:grid;gap:12px}
+.eyebrow{font:500 12px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font:700 clamp(30px,5vw,48px)/1.05 var(--f-display);margin:0;text-wrap:balance;letter-spacing:-.01em}
+h2{font:700 24px/1.2 var(--f-display);margin:0;text-wrap:balance}
+h3{font:700 18px/1.25 var(--f-display);margin:0;text-wrap:balance}
+.lede{max-width:68ch;color:var(--muted);margin:0}
+.ruler{height:22px;border-bottom:1px solid var(--line);background:repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px 12px) bottom/100% 8px no-repeat,repeating-linear-gradient(90deg,var(--muted) 0 1px,transparent 1px 120px) bottom/100% 16px no-repeat;position:relative;opacity:.8}
+.notice{border:1px solid var(--line);background:var(--panel);padding:14px 16px;border-radius:6px;max-width:80ch;font-size:14px;color:var(--muted)}
+.notice strong{color:var(--ink)}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.filters button{font:500 13px var(--f-body);border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:6px 12px;border-radius:999px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--panel)}
+.filters button:focus-visible,a:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,520px),1fr));gap:20px}
+.card{display:grid;grid-template-columns:150px 1fr;gap:18px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px}
+@media (max-width:460px){.card{grid-template-columns:1fr}.mon{max-width:180px}}
+.info{display:grid;gap:8px;align-content:start;min-width:0}
+.meta{display:flex;flex-wrap:wrap;gap:6px;font:500 11px/1 var(--f-mono);text-transform:uppercase;letter-spacing:.06em}
+.chip{padding:5px 8px;border-radius:4px;border:1px solid var(--line);color:var(--muted)}
+.chip.cat{color:var(--accent);border-color:currentColor}
+.chip.d-básico{color:var(--ok);border-color:currentColor}.chip.d-intermediário{color:var(--warn);border-color:currentColor}.chip.d-avançado{color:var(--hard);border-color:currentColor}
+.tec{font-weight:600;margin:0}
+dl{margin:0;display:grid;gap:6px;font-size:13.5px}
+dt{font:500 11px var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+dd{margin:0}
+a{color:var(--accent)}
+.src{font:500 12.5px var(--f-mono);word-break:break-all}
+.num{font:500 12px var(--f-mono);color:var(--muted)}
+/* monitor 9:16 */
+.mon{position:relative;aspect-ratio:9/16;align-self:start;max-width:100%;background:var(--screen);border-radius:10px;overflow:hidden;color:var(--on-screen);font-family:var(--f-display)}
+.mon .tag{position:absolute;left:6px;bottom:6px;font:500 9px var(--f-mono);letter-spacing:.06em;opacity:.7;z-index:9}
+.l{position:absolute}
+.fig{left:30%;right:30%;bottom:0;height:52%;background:var(--screen-2);border-radius:40% 40% 0 0}
+.fig::before{content:"";position:absolute;left:28%;right:28%;top:-34%;aspect-ratio:1;border-radius:50%;background:var(--screen-2)}
+.room{inset:0;background:linear-gradient(180deg,#6F8796 0 55%,#B59877 55% 100%)}
+.room2{inset:0;background:linear-gradient(180deg,#D9CBB4 0 58%,#7A5A43 58% 100%)}
+.cap{left:8%;right:8%;bottom:24%;text-align:center;font-weight:700;font-size:17px;text-transform:uppercase}
+/* 1 pop */
+.pop span{position:absolute;inset:0;opacity:0;animation:pop 3s infinite}
+.pop span:nth-child(2){animation-delay:1s}.pop span:nth-child(3){animation-delay:2s}
+@keyframes pop{0%{opacity:1;transform:scale(.7)}6%{transform:scale(1.08)}10%{transform:scale(1)}32%{opacity:1}33.4%,100%{opacity:0}}
+/* 2 styles */
+.sty span{position:absolute;inset:0;opacity:0;animation:sty 4.5s infinite}
+.sty span:nth-child(2){animation-delay:1.5s}.sty span:nth-child(3){animation-delay:3s}
+.sty b{padding:2px 6px}
+.sty span:nth-child(1) b{background:var(--accent-2);color:#111}
+.sty span:nth-child(2) b{-webkit-text-stroke:1px #111;color:#FFE24A;text-shadow:2px 2px 0 #111}
+.sty span:nth-child(3) b{font-family:Georgia,serif;text-transform:none;font-style:italic;font-weight:400}
+@keyframes sty{0%,32%{opacity:1}33.4%,100%{opacity:0}}
+/* 3 PiP */
+.bub{width:46%;aspect-ratio:1;border-radius:50%;right:7%;bottom:8%;border:3px solid var(--accent-2);background:var(--screen);overflow:hidden;animation:bub 4s infinite;transform-origin:80% 80%}
+.bub .fig{left:22%;right:22%;height:58%}
+@keyframes bub{0%,15%{transform:scale(0)}25%{transform:scale(1.06)}30%,85%{transform:scale(1)}95%,100%{transform:scale(0)}}
+/* 4 text behind */
+.big{left:-4%;right:-4%;top:22%;text-align:center;font-size:34px;font-weight:700;line-height:.95;color:var(--accent-2);animation:rise 4s infinite}
+.front{z-index:3}
+@keyframes rise{0%{transform:translateY(30%);opacity:0}20%,85%{transform:none;opacity:1}100%{opacity:0}}
+/* 5 wipe */
+.wipeB{inset:0;clip-path:polygon(0 0,0 0,0 100%,0 100%);animation:wipe 3.2s infinite}
+.bar{top:-10%;bottom:-10%;width:22%;background:#3A2A1E;transform:skewX(-12deg);left:-30%;animation:bar 3.2s infinite;z-index:4}
+@keyframes wipe{0%,25%{clip-path:polygon(0 0,0 0,-10% 100%,-10% 100%)}60%,90%{clip-path:polygon(0 0,115% 0,105% 100%,0 100%)}100%{clip-path:polygon(0 0,115% 0,105% 100%,0 100%)}}
+@keyframes bar{0%,25%{left:-30%}60%,100%{left:110%}}
+/* 6 parallax */
+.p1{inset:-8%;background:linear-gradient(180deg,#9DB3C2,#C9D6DE);animation:px 5s ease-in-out infinite alternate}
+.p2{left:-10%;right:-10%;bottom:20%;height:40%;background:linear-gradient(90deg,#8F7A66 0 30%,transparent 30% 62%,#76624F 62%);animation:px2 5s ease-in-out infinite alternate}
+.p3{left:10%;width:55%;bottom:-6%;height:30%;background:#4E3B2E;border-radius:10px 10px 0 0;animation:px3 5s ease-in-out infinite alternate}
+@keyframes px{to{transform:scale(1.04) translateX(-2%)}}
+@keyframes px2{to{transform:scale(1.08) translateX(-6%)}}
+@keyframes px3{to{transform:scale(1.14) translateX(-14%)}}
+/* 7 plan */
+.plan{inset:0;background:var(--screen);background-image:linear-gradient(var(--on-screen) 2px,transparent 2px),linear-gradient(90deg,var(--on-screen) 2px,transparent 2px);background-size:50% 33%;background-position:8% 10%;opacity:.0;animation:st 6s infinite}
+.mass{inset:18% 12%;background:linear-gradient(135deg,#9AA9B5 0 50%,#7D8C98 50%);clip-path:polygon(20% 0,100% 15%,80% 100%,0 85%);opacity:0;animation:st 6s 2s infinite}
+.rend{inset:0;background:linear-gradient(180deg,#86A7BF 0 45%,#E8DCC8 45% 70%,#9A7556 70%);opacity:0;animation:st 6s 4s infinite}
+@keyframes st{0%{opacity:0}5%,33%{opacity:1}38%,100%{opacity:0}}
+.plan{animation-name:st0}@keyframes st0{0%,33%{opacity:.9}38%,100%{opacity:0}}
+/* 8 timelapse */
+.tlA{inset:0;background:repeating-linear-gradient(45deg,#5A5047 0 10px,#665B51 10px 20px)}
+.tlB{inset:0;opacity:0;animation:tl 4s infinite}
+.lab{top:8%;left:8%;font:700 11px var(--f-mono);background:var(--on-screen);color:#111;padding:3px 6px;z-index:5}
+.lab.a{animation:la 4s infinite}.lab.b{opacity:0;animation:lb 4s infinite}
+.prog{left:0;bottom:0;height:4px;background:var(--accent-2);animation:pg 4s infinite;z-index:6}
+@keyframes tl{0%,55%{opacity:0}65%,100%{opacity:1}}
+@keyframes la{0%,55%{opacity:1}60%,100%{opacity:0}}
+@keyframes lb{0%,60%{opacity:0}65%,100%{opacity:1}}
+@keyframes pg{0%{width:0}60%,100%{width:100%}}
+/* 9 rhythm */
+.zoom{inset:0;animation:zm 3s steps(1) infinite}
+@keyframes zm{0%{transform:scale(1)}33%{transform:scale(1.22) translateY(6%)}66%{transform:scale(1.08)}}
+.ins{inset:0;opacity:0;animation:ins 3s steps(1) infinite}
+@keyframes ins{0%,49%{opacity:0}50%,64%{opacity:1}65%{opacity:0}}
+.ticks{left:6%;right:6%;bottom:5%;height:6px;background:repeating-linear-gradient(90deg,var(--accent-2) 0 2px,transparent 2px 14px);z-index:6;opacity:.8}
+/* 10 lower third */
+.lt{left:8%;bottom:16%;width:62%;padding:6px 8px;background:var(--on-screen);color:#111;font:600 10px var(--f-body);border-left:4px solid var(--accent);animation:lt 4s infinite}
+@keyframes lt{0%,15%{transform:translateX(-130%)}30%,85%{transform:none}100%{transform:translateX(-130%)}}
+.top3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.spec{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:8px;align-content:start}
+.spec p{margin:0;font-size:14px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+.tbl{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:8px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 11px var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+.pr{font:600 12px var(--f-mono);text-transform:uppercase}
+.pr.alta{color:var(--hard)}.pr.media{color:var(--warn)}.pr.baixa{color:var(--muted)}
+footer{font-size:13px;color:var(--muted);max-width:80ch}
+@media (prefers-reduced-motion:reduce){.mon *{animation:none!important}}
+</style>
+<div class="wrap">
+<header>
+  <span class="eyebrow">Radar de criativos · 19 nov 2026 · 10 referências</span>
+  <h1>Radar Graviton — 19/11</h1>
+  <div class="ruler" aria-hidden="true"></div>
+  <p class="lede">Dez técnicas de edição para incorporar ao Graviton Video Editor, duas por categoria, com foco em arquitetura, reformas, estética e odontologia. Nenhuma repete os radares de 07 a 18/11.</p>
+  <div class="notice"><strong>Como ler as prévias:</strong> cada monitor 9:16 é uma animação esquemática feita por nós para ilustrar o efeito. Não é a miniatura do vídeo original: a rede desta execução bloqueou YouTube, TikTok, Vimeo e Behance, então nenhum vídeo foi assistido. "Observado" vem só do título e do resumo da busca. Técnica, momento e criador não foram verificados. Nenhum dado de desempenho é afirmado.</div>
+</header>
+<section aria-labelledby="g"><div style="display:grid;gap:14px">
+  <h2 id="g">Galeria</h2>
+  <div class="filters" role="group" aria-label="Filtrar por categoria" id="filters"></div>
+  <div class="grid" id="grid"></div>
+</div></section>
+<section aria-labelledby="t3" style="display:grid;gap:14px">
+  <h2 id="t3">Top 3 do dia</h2>
+  <div class="top3">
+    <article class="spec"><span class="num">Ref. 05 · Animações</span><h3>Wipe por objeto</h3>
+      <p><b>Resultado:</b> parede, batente ou coluna cruza o quadro e revela o ambiente seguinte.</p>
+      <p><b>Parâmetros:</b> direção, ângulo da borda (0–30°), duração (8–20 frames), suavização (0–40px), curva de velocidade, sombra na borda.</p>
+      <p><b>Comportamento:</b> a borda acompanha o movimento lateral do clipe A; o clipe B aparece atrás dela, sem dissolve.</p>
+      <p><b>Tecnologia:</b> máscara animada por keyframes (Canvas/WebGL ou ffmpeg alphamerge); modo avançado com optical flow.</p></article>
+    <article class="spec"><span class="num">Ref. 06 · Animações</span><h3>Foto viva (parallax 2.5D)</h3>
+      <p><b>Resultado:</b> render ou foto estática ganha profundidade com câmera lenta.</p>
+      <p><b>Parâmetros:</b> movimento (dolly-in, pan, órbita), amplitude (1–6%), duração (2–6s), intensidade da profundidade, blur de fundo.</p>
+      <p><b>Comportamento:</b> planos próximos se deslocam mais que o fundo, em ease-in-out contínuo.</p>
+      <p><b>Tecnologia:</b> profundidade monocular (tipo Depth Anything/MiDaS), inpainting das bordas, malha deslocada em WebGL.</p></article>
+    <article class="spec"><span class="num">Ref. 03 · Composição</span><h3>Bolha do apresentador</h3>
+      <p><b>Resultado:</b> a pessoa fica num círculo sobre o projeto, a obra ou a tela, sem sair de cena.</p>
+      <p><b>Parâmetros:</b> posição (zona segura do Reels), diâmetro (20–45% da largura), borda 0–10px, sombra, entrada pop/slide, troca automática tela cheia ↔ bolha.</p>
+      <p><b>Comportamento:</b> ao entrar um B-roll, a pessoa encolhe para a bolha em 8–12 frames; volta à tela cheia quando ele termina.</p>
+      <p><b>Tecnologia:</b> compositor de camadas com máscara e keyframes; detecção de rosto para centralizar.</p></article>
+  </div>
+</section>
+<section aria-labelledby="imp" style="display:grid;gap:14px">
+  <h2 id="imp">O que vale implementar no editor</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Prioridade</th><th>Proposta</th><th>Motivo</th></tr></thead>
+    <tbody>
+      <tr><td class="pr alta">Alta</td><td>Bolha do apresentador com troca automática</td><td>Simples de fazer e resolve a alternância pessoa ↔ projeto em todos os nichos</td></tr>
+      <tr><td class="pr alta">Alta</td><td>Wipe por objeto, modo simples (máscara linear inclinada)</td><td>Transição própria de arquitetura e imóveis, sem IA</td></tr>
+      <tr><td class="pr media">Média</td><td>Foto viva (parallax 2.5D)</td><td>Grande ganho para renders; exige profundidade e inpainting</td></tr>
+      <tr><td class="pr media">Média</td><td>Bloco "Da planta ao render" e template de time-lapse de obra</td><td>Reaproveitam transições já existentes</td></tr>
+      <tr><td class="pr media">Média</td><td>Legenda pop de 1 palavra (preset)</td><td>Variação barata do motor de legendas</td></tr>
+      <tr><td class="pr baixa">Baixa</td><td>Texto atrás do apresentador</td><td>Depende de segmentação de pessoa por quadro</td></tr>
+      <tr><td class="pr baixa">Baixa</td><td>Preset "Educacional limpo"</td><td>Assistir à ref. 10 antes de especificar</td></tr>
+    </tbody></table></div>
+</section>
+<footer>Leads da Meta Ads Library (estética e odontologia, BR, ativos) ficaram para análise manual e estão no relatório do dia. Catálogo central consolidado: 79 referências únicas, em <span class="src">catalogo/catalogo-central.csv</span> no branch claude/ecstatic-fermi-tdut5n.</footer>
+</div>
+<script>
+const DATA=[{"categoria": "Legendas", "titulo": "How to Create Pop-up Captions: One Word at a Time with CAPCUT 2026", "url": "https://www.youtube.com/watch?v=4Ldj-B5NfXc", "tecnica": "Legenda pop-up de uma palavra por vez", "observado": "Título e resumo da busca: legendas que surgem uma palavra por vez, tutorial CapCut de 2026.", "hipotese": "Cada palavra é um bloco de texto curto com animação de entrada em escala (pop) curta; sem linha acumulada.", "reproduzir": "Quebrar a transcrição em blocos de 1 palavra com timestamps; cada bloco entra com escala 70%→105%→100% em ~6 frames e sai no início da próxima palavra.", "dificuldade": "básico", "nichos": ["Marketing e negócios", "Serviços profissionais", "Estética", "Odontologia"], "graviton": "Preset 'Pop 1 palavra' no motor de legendas, com escala de entrada e overshoot configuráveis."}, {"categoria": "Legendas", "titulo": "How To Create 10 VIRAL Caption Styles Using CapCut", "url": "https://www.youtube.com/watch?v=Q04FF5KZyt4", "tecnica": "Coleção de 10 estilos de legenda (presets)", "observado": "Título: 10 estilos de legenda feitos no CapCut; o resumo cita um link externo de plugin (KeyPlugs).", "hipotese": "Variações de cor, contorno, caixa de fundo e animação de entrada sobre a mesma legenda base.", "reproduzir": "Assistir e registrar cada estilo como um preset: fonte, peso, caixa, contorno, sombra, cor ativa, animação de entrada.", "dificuldade": "intermediário", "nichos": ["Todos"], "graviton": "Fonte para ampliar a galeria de presets de legenda; catalogar os 10 estilos como fichas separadas depois de assistir."}, {"categoria": "Composição", "titulo": "How To Create a Circle Talking Head Overlay In CapCut PC: Mask, Border & Animation Tutorial", "url": "https://www.youtube.com/watch?v=fmieZvYtXS8", "tecnica": "Picture-in-picture circular com borda e animação", "observado": "Título: máscara circular, borda e animação de um talking head sobreposto, no CapCut PC.", "hipotese": "Máscara circular sobre a camada da pessoa, traço (stroke) colorido e entrada com escala/fade.", "reproduzir": "Camada da pessoa acima do B-roll/tela; máscara circular com feather 0; stroke 4–8px; entrada scale 0→100% com ease-out em ~10 frames.", "dificuldade": "básico", "nichos": ["Marketing e negócios", "Serviços profissionais", "Arquitetura e interiores"], "graviton": "Layout 'Bolha do apresentador' sobre projeto 3D, fotos de obra ou tela; posição, raio, borda e animação configuráveis."}, {"categoria": "Composição", "titulo": "How to Put Text Behind Moving Objects in After Effects - 4 Rotoscoping Techniques [AE Tutorial 2023]", "url": "https://www.youtube.com/watch?v=Iyuftoajtg0", "tecnica": "Texto atrás da pessoa (composição em camadas com rotoscopia)", "observado": "Título: quatro técnicas de rotoscopia para colocar texto atrás de objetos em movimento (2023).", "hipotese": "Pilha de 3 camadas: vídeo original, texto, recorte da pessoa por Roto Brush por cima.", "reproduzir": "Segmentar a pessoa por quadro (matte), renderizar texto entre o fundo e a matte. No editor: segmentação por IA em vez de rotoscopia manual.", "dificuldade": "avançado", "nichos": ["Arquitetura de alto padrão", "Estética", "Marketing e negócios"], "graviton": "Título de abertura 'atrás do apresentador' em tipografia grande; exige matte de pessoa."}, {"categoria": "Animações", "titulo": "Creating Mask Transitions for Real Estate Videos", "url": "https://www.youtube.com/watch?v=Qi1IIyCX8sY", "tecnica": "Transição por máscara (walk-by / passagem por objeto)", "observado": "Título e resumo: transições com máscara feitas para vídeos de imóveis.", "hipotese": "Uma parede, batente ou móvel em primeiro plano cruza o quadro; a máscara segue a borda do objeto e revela o plano seguinte.", "reproduzir": "Gravar movimento lateral passando por um objeto; mascarar a borda do objeto quadro a quadro (ou usar wipe linear inclinado com a mesma velocidade) e revelar o clipe seguinte.", "dificuldade": "intermediário", "nichos": ["Arquitetura e interiores", "Reformas residenciais", "Arquitetura de alto padrão"], "graviton": "Transição 'Wipe por objeto': versão simples com wipe linear com ângulo, velocidade e suavização de borda; versão avançada com máscara rastreada."}, {"categoria": "Animações", "titulo": "Transform Your PHOTOS Into VIDEOS! 2.5D Parallax Tutorial", "url": "https://www.youtube.com/watch?v=aQWnmF6UG5s", "tecnica": "Parallax 2.5D a partir de foto estática", "observado": "Título e resumo: animar fotos com parallax 2.5D em Photoshop e After Effects, com recorte de elementos.", "hipotese": "Foto separada em 2–3 planos (frente, meio, fundo) com preenchimento do fundo; câmera virtual move os planos em velocidades diferentes.", "reproduzir": "Gerar mapa de profundidade (IA) ou recortar planos; deslocar planos com amplitude proporcional à proximidade; dolly-in lento de 3–5s.", "dificuldade": "avançado", "nichos": ["Arquitetura e interiores", "Arquitetura de alto padrão", "Reformas residenciais"], "graviton": "Efeito 'Foto viva' para renders e fotos de ambientes prontos; profundidade, direção e duração configuráveis."}, {"categoria": "Materiais complementares", "titulo": "From Simple Floor Plan to 3D Perspective", "url": "https://www.youtube.com/watch?v=ils3LgT6zbU", "tecnica": "Planta 2D evoluindo para perspectiva 3D", "observado": "Título: da planta simples à perspectiva 3D. A busca não mostrou como a passagem é editada.", "hipotese": "Sequência planta → volumetria → render; pode ser usada como B-roll com crossfade ou wipe entre estágios.", "reproduzir": "Exportar 3 estágios alinhados no mesmo enquadramento (planta, massa 3D, render) e encadear com dissolve ou wipe de 0,4–0,6s sobre a fala do arquiteto.", "dificuldade": "intermediário", "nichos": ["Arquitetura e interiores", "Arquitetura de alto padrão", "Reformas residenciais"], "graviton": "Bloco 'Da planta ao render': recebe 2–4 imagens alinhadas e gera a sequência com a transição escolhida."}, {"categoria": "Materiais complementares", "titulo": "Before and After Renovation (Time-lapse)", "url": "https://www.youtube.com/shorts/N82kr2SxS5I", "tecnica": "Time-lapse de reforma com antes e depois (Shorts vertical)", "observado": "Formato Shorts (vertical). Resumo da busca: sótão de casa antiga em Toronto transformado em suíte aberta.", "hipotese": "Time-lapse acelerado da obra com corte para o estado final no mesmo ângulo.", "reproduzir": "Câmera fixa no mesmo ângulo; acelerar 20–100x; congelar 0,5s no 'antes' e no 'depois' com rótulo.", "dificuldade": "básico", "nichos": ["Reformas residenciais", "Arquitetura e interiores"], "graviton": "Template 'Obra em time-lapse': speed ramp automático, rótulos ANTES/DEPOIS e freeze no quadro final."}, {"categoria": "Edição completa", "titulo": "How to Make Talking Head Reels That Keep People Watching (Tutorial)", "url": "https://www.youtube.com/watch?v=HSqc7RdLW90", "tecnica": "Ritmo e retenção em Reels de talking head", "observado": "Título: tutorial de Reels de talking head que prendem a atenção. Nenhum dado de retenção foi verificado.", "hipotese": "Combinação de corte de pausas, variação de enquadramento, legendas e inserts de B-roll.", "reproduzir": "Assistir e mapear a sequência de recursos por segundo (corte, zoom, insert, legenda) para criar um preset de ritmo.", "dificuldade": "intermediário", "nichos": ["Todos"], "graviton": "Base para o preset 'Ritmo Reels': remoção de silêncio, punch-in alternado e inserts a cada 3–5s."}, {"categoria": "Edição completa", "titulo": "How to Edit Ali Abdaal Shorts in Premiere Pro & After Effects (FREE ASSETS PACK!)", "url": "https://www.youtube.com/watch?v=5bFGfjDxHFg", "tecnica": "Estilo educacional limpo: 3 sequências de edição para Shorts", "observado": "Resumo da busca: cobre 3 sequências de edição do estilo de Shorts; o resumo não as lista.", "hipotese": "Gráficos discretos e texto de apoio, sem excesso de elementos (outro resultado descreve o estilo como sem gráficos exagerados).", "reproduzir": "Assistir e registrar as 3 sequências; replicar como templates de cena (abertura, explicação com elemento gráfico, fechamento).", "dificuldade": "intermediário", "nichos": ["Serviços profissionais", "Marketing e negócios", "Odontologia"], "graviton": "Contraponto ao estilo saturado: preset 'Educacional limpo' para profissionais de saúde e serviços."}];
+const P=[
+'<div class="l fig" style="left:26%;right:26%"></div><div class="l cap pop"><span>Seu</span><span style="color:var(--accent-2)">sorriso</span><span>novo</span></div>',
+'<div class="l room2"></div><div class="l cap sty"><span><b>projeto</b></span><span><b>projeto</b></span><span><b>projeto</b></span></div>',
+'<div class="l room"></div><div class="l bub"><div class="l fig"></div></div>',
+'<div class="l" style="inset:0;background:var(--screen-2);opacity:.4"></div><div class="l big">ALTO<br>PADRÃO</div><div class="l fig front" style="background:var(--screen)"></div>',
+'<div class="l room"></div><div class="l wipeB"><div class="l room2"></div></div><div class="l bar"></div>',
+'<div class="l p1"></div><div class="l p2"></div><div class="l p3"></div>',
+'<div class="l plan"></div><div class="l mass"></div><div class="l rend"></div>',
+'<div class="l tlA"></div><div class="l tlB"><div class="l room2"></div></div><span class="l lab a">ANTES</span><span class="l lab b">DEPOIS</span><div class="l prog"></div>',
+'<div class="l zoom"><div class="l" style="inset:0;background:var(--screen)"></div><div class="l fig"></div></div><div class="l ins"><div class="l room2"></div></div><div class="l ticks"></div>',
+'<div class="l fig"></div><div class="l lt">Dra. Ana · Implantodontia</div>'
+];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const grid=document.getElementById('grid');
+grid.innerHTML=DATA.map((d,i)=>`<article class="card" data-cat="${esc(d.categoria)}">
+ <div class="mon" role="img" aria-label="Animação ilustrativa: ${esc(d.tecnica)}">${P[i]}<span class="tag">ILUSTRATIVO</span></div>
+ <div class="info">
+  <div class="meta"><span class="chip cat">${esc(d.categoria)}</span><span class="chip d-${esc(d.dificuldade)}">${esc(d.dificuldade)}</span><span class="num">Ref. ${String(i+1).padStart(2,'0')}</span></div>
+  <h3>${esc(d.titulo)}</h3>
+  <p class="tec">${esc(d.tecnica)}</p>
+  <dl>
+   <div><dt>Observado (título/busca)</dt><dd>${esc(d.observado)}</dd></div>
+   <div><dt>Hipótese da técnica</dt><dd>${esc(d.hipotese)}</dd></div>
+   <div><dt>Como reproduzir</dt><dd>${esc(d.reproduzir)}</dd></div>
+   <div><dt>No Graviton</dt><dd>${esc(d.graviton)}</dd></div>
+   <div><dt>Nichos</dt><dd>${esc(d.nichos.join(', '))}</dd></div>
+  </dl>
+  <a class="src" href="${esc(d.url)}" target="_blank" rel="noopener">${esc(d.url.replace('https://',''))}</a>
+ </div></article>`).join('');
+const cats=['Todas',...new Set(DATA.map(d=>d.categoria))];
+const f=document.getElementById('filters');
+f.innerHTML=cats.map((c,i)=>`<button type="button" id="f${i}" aria-pressed="${i===0}">${esc(c)}</button>`).join('');
+f.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ f.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+ const c=b.textContent;grid.querySelectorAll('.card').forEach(el=>el.hidden=!(c==='Todas'||el.dataset.cat===c));});
+</script>
