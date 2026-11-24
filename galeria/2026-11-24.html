@@ -1,0 +1,183 @@
+<title>Radar de Criativos Graviton</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: mesa de edição — cabeçalho tipo slate, filtros como trilhas, cards com prévia 9:16 esquemática à esquerda */
+:root{
+  --bg:#EDEFF2; --surface:#FFFFFF; --fg:#15181E; --muted:#5B6372; --line:#D5D9E0;
+  --accent:#2F55D4; --accent-soft:#E3E9FB; --warn:#9A5B00; --warn-soft:#FBEFD9;
+  --screen:#1C2029; --screen-fg:#E8EBF1; --screen-dim:#596173;
+  --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12151B; --surface:#1A1E26; --fg:#E6E9EF; --muted:#98A1B2; --line:#2B313C;
+  --accent:#7D9BFF; --accent-soft:#1F2A4A; --warn:#F0B35A; --warn-soft:#3A2C14;
+  --screen:#0B0D11; --screen-fg:#E8EBF1; --screen-dim:#4A5263; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12151B; --surface:#1A1E26; --fg:#E6E9EF; --muted:#98A1B2; --line:#2B313C;
+  --accent:#7D9BFF; --accent-soft:#1F2A4A; --warn:#F0B35A; --warn-soft:#3A2C14;
+  --screen:#0B0D11; --screen-fg:#E8EBF1; --screen-dim:#4A5263; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px}
+.wrap{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+.slate{display:grid;grid-template-columns:1fr auto;gap:16px 24px;align-items:end;border-bottom:2px solid var(--fg);padding-bottom:18px}
+.slate h1{font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-.01em;line-height:1.05}
+.slate .meta{font-family:var(--f-mono);font-size:12.5px;color:var(--muted);display:grid;grid-template-columns:auto auto;gap:2px 14px;text-align:right}
+.slate .meta b{color:var(--fg);font-weight:500}
+.lede{max-width:68ch;color:var(--muted);margin:0}
+.notice{background:var(--warn-soft);color:var(--fg);border-left:4px solid var(--warn);padding:12px 16px;font-size:14px;max-width:80ch}
+.notice strong{color:var(--warn)}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.filters button{font:500 13px var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--fg);padding:7px 12px;border-radius:999px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.filters button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,520px),1fr));gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;display:grid;grid-template-columns:132px 1fr;gap:16px;padding:16px}
+.card>div{min-width:0}
+.prev{width:132px;aspect-ratio:9/16;max-width:100%;background:var(--screen);border-radius:8px;overflow:hidden;position:relative}
+.prev svg{width:100%;height:100%;display:block}
+.prev .tag{position:absolute;left:6px;bottom:6px;font:500 9.5px var(--f-mono);color:var(--screen-fg);background:rgba(0,0,0,.45);padding:2px 5px;border-radius:3px;letter-spacing:.04em}
+.top{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font:500 11.5px var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.chip{padding:2px 8px;border-radius:4px;background:var(--accent-soft);color:var(--accent)}
+.lvl{padding:2px 8px;border-radius:4px;border:1px solid var(--line)}
+.card h3{font-size:18px;font-weight:700;margin:6px 0 2px;line-height:1.25}
+.src{font-size:12.5px;color:var(--muted);overflow-wrap:anywhere}
+.src a{color:var(--accent)}
+dl{margin:10px 0 0;display:grid;gap:6px}
+dt{font:500 11px var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+dd{margin:0 0 4px;font-size:14px}
+details{margin-top:6px;font-size:14px}
+summary{cursor:pointer;color:var(--accent);font-weight:500}
+.hyp{color:var(--muted);font-style:italic}
+section h2{font-size:24px;font-weight:800;margin-bottom:12px}
+.top3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
+.spec{border-top:3px solid var(--accent);background:var(--surface);padding:14px 16px;border-radius:0 0 8px 8px}
+.spec h3{font-size:17px;margin-bottom:6px}
+.spec ul{margin:6px 0 0;padding-left:18px;font-size:14px}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;background:var(--surface)}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 11px var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.pri{font:600 12px var(--f-mono);padding:2px 8px;border-radius:4px;white-space:nowrap}
+.pri.alta{background:var(--accent);color:var(--surface)}
+.pri.media{background:var(--accent-soft);color:var(--accent)}
+.pri.baixa{border:1px solid var(--line);color:var(--muted)}
+.queue{font-size:14px;color:var(--muted)}
+.queue a{color:var(--accent);overflow-wrap:anywhere}
+@media (max-width:480px){.card{grid-template-columns:96px 1fr;gap:12px}.prev{width:96px}.slate{grid-template-columns:1fr}.slate .meta{text-align:left}}
+@media (prefers-reduced-motion:no-preference){.card{transition:border-color .15s}.card:hover{border-color:var(--accent)}}
+</style>
+
+<div class="wrap">
+  <header class="slate">
+    <div>
+      <div class="top">Graviton Video Editor · Biblioteca de estilos</div>
+      <h1>Radar de Criativos</h1>
+    </div>
+    <div class="meta"><span>DATA</span><b>24/11/2026</b><span>REFERÊNCIAS</span><b id="count">—</b><span>STATUS</span><b>nada implementado</b></div>
+  </header>
+
+  <p class="lede">Dez técnicas de edição para criativos verticais, separadas por categoria, com o que foi observado, a hipótese técnica e como levar cada uma para o editor.</p>
+
+  <div class="notice"><strong>Prévias esquemáticas.</strong> A rede desta execução bloqueou YouTube, Behance, Vimeo e as miniaturas. Cada card mostra um diagrama da técnica, não um frame do vídeo. Os vídeos não foram assistidos: as descrições vêm do título e do trecho indexado, e a minutagem não foi verificada. Abra o link original para conferir.</div>
+
+  <nav class="filters" id="filters" aria-label="Filtrar por categoria"></nav>
+  <div class="grid" id="grid"></div>
+
+  <section>
+    <h2>Top 3 do dia</h2>
+    <div class="top3">
+      <div class="spec"><h3>Antes/Depois deslizante</h3><p class="src">Ref. 07 · básico</p>
+        <ul><li>Linha divisória revela o "depois" sobre o "antes" no mesmo enquadramento</li><li>Parâmetros: direção, 0,8 a 3 s, easing, vai-e-volta, rótulos, auto-alinhamento</li><li>Tecnologia: máscara animada (Canvas/WebGL ou FFmpeg overlay+crop), homografia OpenCV para alinhar</li></ul></div>
+      <div class="spec"><h3>Legenda por palavra + palavra-chave</h3><p class="src">Refs. 01 e 02 · básico/intermediário</p>
+        <ul><li>Blocos de 2 a 4 palavras; cada uma entra no seu timestamp; palavra-chave com acento e escala 1,15</li><li>Parâmetros: palavras/bloco, zona segura, tipo de entrada, 80 a 200 ms, caixa ou contorno</li><li>Tecnologia: WhisperX (timestamps por palavra) + libass ou Canvas/Remotion</li></ul></div>
+      <div class="spec"><h3>Parallax 2.5D "Foto viva"</h3><p class="src">Ref. 08 · avançado</p>
+        <ul><li>Render ou foto parada ganha profundidade com dolly-in lento</li><li>Parâmetros: movimento, intensidade 2 a 8%, 3 a 6 s, desfoque de profundidade</li><li>Tecnologia: Depth Anything + displacement em WebGL; inpainting LaMa nas bordas</li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>O que vale implementar no editor</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Prioridade</th><th>Proposta</th><th>Motivo</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pri alta">ALTA</span></td><td>Antes/Depois deslizante</td><td>Atende reformas, interiores, estética e odontologia; implementação simples</td></tr>
+        <tr><td><span class="pri alta">ALTA</span></td><td>Legenda por palavra + palavra-chave</td><td>Base de todos os demais estilos de legenda</td></tr>
+        <tr><td><span class="pri alta">ALTA</span></td><td>Layout Empilhado 50/50</td><td>Simples e muito reutilizável (rosto + prova)</td></tr>
+        <tr><td><span class="pri media">MÉDIA</span></td><td>Transição Impacto (zoom/blur/shake)</td><td>Dinamismo; limitar a frequência para não cansar</td></tr>
+        <tr><td><span class="pri media">MÉDIA</span></td><td>Montador de blocos / Ritmo Autoridade</td><td>Maior efeito em ritmo, mas depende das legendas e layouts</td></tr>
+        <tr><td><span class="pri media">MÉDIA</span></td><td>Parallax 2.5D Foto viva</td><td>Muito útil para arquitetura; exige modelo de profundidade</td></tr>
+        <tr><td><span class="pri baixa">BAIXA</span></td><td>Tríptico vertical</td><td>Variação do layout empilhado</td></tr>
+        <tr><td><span class="pri baixa">BAIXA</span></td><td>Zoom-through</td><td>Forte, porém avançado e de uso pontual</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>Fila de inspeção manual</h2>
+    <p class="queue">Anúncios ativos de estética no Brasil encontrados na Meta Ads Library. A API não devolve o vídeo, então a edição não foi analisada e eles não contam no total do dia:
+      <a href="https://www.facebook.com/ads/library/?id=1044400295344703">Dra. Mirella Quadros</a> ·
+      <a href="https://www.facebook.com/ads/library/?id=976972408473416">Dra Beatriz Abra</a> ·
+      <a href="https://www.facebook.com/ads/library/?id=1805644580701556">Go up - Marketing Digital</a></p>
+  </section>
+</div>
+
+<script>
+const REFS = [{"id": "GRV-2026-11-24-01", "data_descoberta": "2026-11-24", "titulo": "How to Highlight Words in Captions in Premiere Pro (Viral ...)", "url": "https://www.youtube.com/watch?v=U3fbSFhQDRY", "criador": "Não confirmado (página do YouTube inacessível nesta execução)", "plataforma": "YouTube", "categoria": "Legendas", "tecnica": "Destaque de palavra-chave dentro da legenda (cor, escala ou estilo)", "observado": "Título e trecho indexado pelo buscador: ensina a destacar palavras isoladas nas legendas do Premiere, alterando cor, escala ou estilo para ênfase e sincronizando o destaque com a fala.", "hipotese": "O destaque provavelmente é feito por estilo de legenda aplicado palavra a palavra; a duração do destaque deve seguir o timestamp de cada palavra.", "descricao_visual": "Legenda em bloco de 2 a 4 palavras em que apenas a palavra de impacto muda de cor e cresce levemente.", "momento": "Não verificado (vídeo não assistido)", "como_reproduzir": "Transcrever com timestamps por palavra; marcar palavras-chave (manual ou por lista); aplicar estilo de destaque (cor de acento + escala 110 a 120%) apenas no intervalo da palavra.", "dificuldade": "básico", "nichos": ["Marketing e negócios", "Serviços profissionais", "Estética", "Odontologia"], "uso_graviton": "Preset 'Palavra-chave' no módulo de legendas, com lista de palavras de ênfase por nicho (ex.: 'sem dor', 'resultado', 'projeto').", "status_implementacao": "não iniciado"}, {"id": "GRV-2026-11-24-02", "data_descoberta": "2026-11-24", "titulo": "Word by Word Text Animation In Premiere Pro 2026 (Text Animator Tool Overview)", "url": "https://www.youtube.com/watch?v=lnM-9rWDXSY", "criador": "Não confirmado (página do YouTube inacessível nesta execução)", "plataforma": "YouTube", "categoria": "Legendas", "tecnica": "Animação de entrada palavra a palavra (Text Animator do Premiere 2026)", "observado": "Título e trecho indexado: usa a nova ferramenta Text Animator do Premiere Pro para animar texto palavra por palavra. Um comentário indexado relata que sombra na legenda pode quebrar transições tipo máquina de escrever; sugere desativar a sombra ou aninhar.", "hipotese": "Os presets do Text Animator devem incluir entradas por palavra (fade, slide, escala) com atraso escalonado.", "descricao_visual": "Cada palavra entra separadamente com micro-animação (deslize/escala), formando a frase em sequência.", "momento": "Não verificado (vídeo não assistido)", "como_reproduzir": "Dividir a frase em tokens; para cada token, animar opacidade 0→1 e deslocamento Y 12px→0 em 120 a 180 ms, com início no timestamp da palavra; easing out-back leve.", "dificuldade": "intermediário", "nichos": ["Marketing e negócios", "Serviços profissionais", "Arquitetura e interiores"], "uso_graviton": "Motor de 'entrada por token' reutilizável por todos os estilos de legenda; evitar dependência de sombra (usar contorno/caixa) conforme o problema relatado.", "status_implementacao": "não iniciado"}, {"id": "GRV-2026-11-24-03", "data_descoberta": "2026-11-24", "titulo": "How to Create a Vertical Split Screen in Premiere Pro (Fast & Easy for TikTok & Instagram)", "url": "https://www.youtube.com/watch?v=PIX9jSQlSlU", "criador": "Não confirmado (página do YouTube inacessível nesta execução)", "plataforma": "YouTube", "categoria": "Composição", "tecnica": "Tela dividida vertical (empilhada) em 9:16", "observado": "Título e trecho indexado: tutorial de split screen vertical rápido para TikTok e Instagram no Premiere.", "hipotese": "Duas faixas 9:8 empilhadas, cada uma recortada e escalada para preencher metade do quadro.", "descricao_visual": "Quadro vertical dividido em duas metades horizontais: em cima a pessoa falando, embaixo a demonstração ou o resultado.", "momento": "Não verificado (vídeo não assistido)", "como_reproduzir": "Canvas 1080x1920; camada A em (0,0,1080,960), camada B em (0,960,1080,960), ambas com 'cover' e ponto focal ajustável; divisória opcional de 4 a 8px.", "dificuldade": "básico", "nichos": ["Odontologia", "Estética facial e corporal", "Reformas residenciais", "Marketing e negócios"], "uso_graviton": "Layout 'Empilhado 50/50' com ponto focal por camada e proporção ajustável (40/60, 50/50, 60/40).", "status_implementacao": "não iniciado"}, {"id": "GRV-2026-11-24-04", "data_descoberta": "2026-11-24", "titulo": "Capcut Tutorial - Vertical Split Screen (ENGLISH)", "url": "https://www.youtube.com/watch?v=LzLqQa4z0vw", "criador": "Não confirmado (página do YouTube inacessível nesta execução)", "plataforma": "YouTube", "categoria": "Composição", "tecnica": "Mosaico vertical de 3 camadas (tríptico)", "observado": "Trecho indexado: ensina a criar o 'trending vertical split screen or 3 layer video' no CapCut mobile.", "hipotese": "Três faixas horizontais iguais (1080x640) com clipes diferentes, possivelmente com entradas escalonadas.", "descricao_visual": "Três faixas empilhadas no quadro vertical, cada uma com um clipe distinto, criando um painel de cenas.", "momento": "Não verificado (vídeo não assistido)", "como_reproduzir": "Grade de 3 linhas com gap configurável; cada célula recebe clipe com 'cover'; entrada escalonada de 150 ms por célula (slide lateral alternado).", "dificuldade": "básico", "nichos": ["Arquitetura e interiores", "Arquitetura de alto padrão", "Reformas residenciais"], "uso_graviton": "Layout 'Tríptico' para mostrar três ambientes, ângulos ou etapas de obra de uma vez.", "status_implementacao": "não iniciado"}, {"id": "GRV-2026-11-24-05", "data_descoberta": "2026-11-24", "titulo": "How to Make Zoom Blur Shake Transition in Premiere Pro", "url": "https://www.youtube.com/watch?v=eUkuD5_TemI", "criador": "Não confirmado (página do YouTube inacessível nesta execução)", "plataforma": "YouTube", "categoria": "Animações e transições", "tecnica": "Transição zoom + desfoque radial + tremor (sem plugins)", "observado": "Trecho indexado: cria uma transição Zoom Blur Shake suave e dinâmica no Premiere Pro sem plugins de terceiros.", "hipotese": "Combinação de escala com keyframes, desfoque direcional/radial no pico e deslocamento aleatório curto (shake) de poucos frames.", "descricao_visual": "No corte, a imagem dá um zoom rápido com borrão de movimento e um tremor curto antes de assentar no plano seguinte.", "momento": "Não verificado (vídeo não assistido)", "como_reproduzir": "Saída: escala 100→130% em 6 frames com zoom blur crescente; entrada: escala 130→100% com blur decrescente; shake de 3 a 5 frames (±8px, ±1°) no ponto de corte.", "dificuldade": "intermediário", "nichos": ["Marketing e negócios", "Estética facial e corporal", "Serviços profissionais"], "uso_graviton": "Transição 'Impacto' com intensidade (baixa/média/alta) e sincronia opcional com batida/SFX 'whoosh'.", "status_implementacao": "não iniciado"}, {"id": "GRV-2026-11-24-06", "data_descoberta": "2026-11-24", "titulo": "Smooth Zoom Through Transition Effect in After Effects", "url": "https://www.youtube.com/watch?v=OqTr53V7_rE", "criador": "Não confirmado (página do YouTube inacessível nesta execução)", "plataforma": "YouTube", "categoria": "Animações e transições", "tecnica": "Zoom-through (atravessar a imagem para a próxima cena)", "observado": "Título indexado: transição de 'zoom through' suave no After Effects.", "hipotese": "Zoom contínuo em direção a um ponto (porta, janela, objeto) até a próxima cena surgir dentro dele, com motion blur.", "descricao_visual": "A câmera parece avançar para dentro de um ponto da imagem e emergir na cena seguinte.", "momento": "Não verificado (vídeo não assistido)", "como_reproduzir": "Definir ponto-alvo (x,y) no clipe A; escalar em direção a ele com easing in; cena B entra escalando de 60→100% centrada no mesmo ponto, cruzando opacidade em 4 frames; motion blur por amostragem de frames.", "dificuldade": "avançado", "nichos": ["Arquitetura e interiores", "Arquitetura de alto padrão", "Reformas residenciais"], "uso_graviton": "Transição 'Atravessar ambiente': entrar por uma porta/janela de um render e sair no ambiente seguinte.", "status_implementacao": "não iniciado"}, {"id": "GRV-2026-11-24-07", "data_descoberta": "2026-11-24", "titulo": "Before & After Comparison Transition in CapCut PC Desktop - Lesson 102 CapCut Tutorial", "url": "https://www.youtube.com/watch?v=qbRcpAVu0BU", "criador": "Não confirmado (página do YouTube inacessível nesta execução)", "plataforma": "YouTube", "categoria": "B-roll e materiais complementares", "tecnica": "Comparação antes/depois com divisória deslizante", "observado": "Trecho indexado: usa o recurso 'Comparison Transition' do CapCut desktop para comparar dois clipes de forma suave.", "hipotese": "Máscara linear animada revelando o 'depois' sobre o 'antes', com linha divisória visível.", "descricao_visual": "Uma linha vertical percorre o quadro e revela a versão 'depois' sobre a 'antes' no mesmo enquadramento.", "momento": "Não verificado (vídeo não assistido)", "como_reproduzir": "Empilhar 'antes' (baixo) e 'depois' (cima) alinhados; máscara retangular com borda x animada 0→1080 em 1,2 a 2 s com easing in-out; linha branca de 4px e alça circular seguindo a borda; rótulos ANTES/DEPOIS.", "dificuldade": "básico", "nichos": ["Reformas residenciais", "Arquitetura e interiores", "Estética facial e corporal", "Odontologia"], "uso_graviton": "Componente 'Antes/Depois' com direção (horizontal/vertical/diagonal), velocidade, rótulos e opção de vai-e-volta.", "status_implementacao": "não iniciado"}, {"id": "GRV-2026-11-24-08", "data_descoberta": "2026-11-24", "titulo": "Create an Epic 2.5D Parallax Animation in After Effects (No Plugins)", "url": "https://www.youtube.com/watch?v=WfD-n1D9WG0", "criador": "Não confirmado (página do YouTube inacessível nesta execução)", "plataforma": "YouTube", "categoria": "B-roll e materiais complementares", "tecnica": "Parallax 2.5D em foto estática", "observado": "Trecho indexado: transforma uma imagem plana em animação parallax 2.5D cinematográfica no After Effects, sem plugins.", "hipotese": "Separação da foto em camadas (frente, meio, fundo), preenchimento das áreas ocultas e câmera 3D com movimento lento.", "descricao_visual": "Foto parada ganha profundidade: o primeiro plano se move mais rápido que o fundo enquanto a câmera avança devagar.", "momento": "Não verificado (vídeo não assistido)", "como_reproduzir": "Gerar mapa de profundidade (modelo monocular) ou segmentar 2 a 3 camadas; inpainting das bordas; deslocar camadas proporcionalmente à profundidade durante 3 a 5 s de dolly-in.", "dificuldade": "avançado", "nichos": ["Arquitetura e interiores", "Arquitetura de alto padrão", "Reformas residenciais"], "uso_graviton": "Efeito 'Foto viva' para renders e fotos de obra, convertendo imagens estáticas em B-roll com movimento.", "status_implementacao": "não iniciado"}, {"id": "GRV-2026-11-24-09", "data_descoberta": "2026-11-24", "titulo": "Alex Hormozi's Edit Style Deconstructed (Masterclass)", "url": "https://www.youtube.com/watch?v=y60ohM4nr4Y", "criador": "tomsproject (segundo o resumo da Recapio; não confirmado no YouTube)", "plataforma": "YouTube", "categoria": "Edição completa", "tecnica": "Ritmo de retenção estilo 'talking head' de negócios (cortes, punch-ins, legendas, SFX)", "observado": "Título indexado e resumo de terceiros (Recapio) descrevendo a desconstrução do estilo. Guias de terceiros sobre o mesmo estilo citam legendas palavra a palavra com destaque amarelo, cortes secos frequentes, punch-ins no rosto e SFX de 'whoosh/pop'; os intervalos citados divergem (1 a 3 s ou 3 a 7 s).", "hipotese": "O ritmo alterna enquadramentos (plano normal/zoom 115 a 130%) a cada frase e insere elemento visual novo a cada poucos segundos.", "descricao_visual": "Pessoa falando em plano médio, cortes secos que removem pausas, zoom súbito em frases-chave, legenda grande central e efeitos sonoros curtos.", "momento": "Não verificado (vídeo não assistido)", "como_reproduzir": "Remover silêncios acima de 250 ms; alternar escala entre 100% e 118% a cada corte; punch-in de 130% nas frases marcadas; legendas palavra a palavra; SFX curto em cada mudança de elemento.", "dificuldade": "intermediário", "nichos": ["Marketing e negócios", "Serviços profissionais", "Odontologia", "Estética facial e corporal"], "uso_graviton": "Preset de edição completa 'Ritmo Autoridade', combinando corte de silêncio, alternância de escala e legenda dinâmica. Há análises de 2026 que falam em saturação do estilo; usar com variações.", "status_implementacao": "não iniciado"}, {"id": "GRV-2026-11-24-10", "data_descoberta": "2026-11-24", "titulo": "How to Make Professional Talking Head Reels in After Effects", "url": "https://www.youtube.com/watch?v=2ediAEWgncg", "criador": "Não confirmado (página do YouTube inacessível nesta execução)", "plataforma": "YouTube", "categoria": "Edição completa", "tecnica": "Reel de talking head com acabamento profissional (alternância rosto/B-roll/gráficos)", "observado": "Trecho indexado: mostra como transformar um vídeo simples de pessoa falando em um reel limpo e profissional no After Effects.", "hipotese": "Inclui reenquadramentos, inserts de B-roll em cortes, títulos animados e tratamento de cor; detalhes não confirmados.", "descricao_visual": "Vídeo de pessoa falando reorganizado em blocos visuais, com mudanças de enquadramento e elementos gráficos limpos.", "momento": "Não verificado (vídeo não assistido)", "como_reproduzir": "Dividir o roteiro em blocos (gancho, problema, prova, CTA); atribuir a cada bloco um modo visual (rosto cheio, PiP sobre B-roll, tela cheia de B-roll, cartela); trocar de modo a cada 2 a 4 s.", "dificuldade": "intermediário", "nichos": ["Serviços profissionais", "Arquitetura e interiores", "Odontologia", "Estética facial e corporal"], "uso_graviton": "Base para o 'Montador de blocos': mapa automático de modos visuais por trecho do roteiro.", "status_implementacao": "não iniciado"}];
+const S = 'var(--screen-fg)', D = 'var(--screen-dim)', A = 'var(--accent)';
+const face = (cx,cy,r)=>`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${D}"/><rect x="${cx-r*1.6}" y="${cy+r*1.1}" width="${r*3.2}" height="${r*2.4}" rx="${r*.8}" fill="${D}"/>`;
+const PREV = {
+  "01": `${face(45,55,16)}<rect x="10" y="112" width="70" height="16" rx="3" fill="rgba(0,0,0,.5)"/><text x="14" y="124" font-family="Archivo" font-weight="800" font-size="9" fill="${S}">O</text><text x="22" y="124.5" font-family="Archivo" font-weight="800" font-size="10" textLength="54" lengthAdjust="spacingAndGlyphs" fill="${A}">RESULTADO</text>`,
+  "02": `${face(45,55,16)}<g font-family="Archivo" font-weight="800" font-size="10"><text x="10" y="122" fill="${S}" textLength="26" lengthAdjust="spacingAndGlyphs">CADA</text><text x="39" y="122" fill="${S}" opacity=".7" textLength="42" lengthAdjust="spacingAndGlyphs">PALAVRA</text><text x="30" y="135" fill="${S}" opacity=".3" textLength="30" lengthAdjust="spacingAndGlyphs">ENTRA</text></g><path d="M44 140 v6 m-3 -3 l3 3 l3 -3" stroke="${A}" fill="none" stroke-width="1.2"/>`,
+  "03": `<rect x="0" y="0" width="90" height="79" fill="${D}" opacity=".55"/>${face(45,34,12)}<rect x="0" y="81" width="90" height="79" fill="${D}" opacity=".9"/><rect x="18" y="98" width="54" height="44" rx="4" fill="none" stroke="${S}" stroke-width="1.5"/><path d="M28 130 l12 -14 l10 9 l8 -6 l6 11" stroke="${A}" fill="none" stroke-width="1.5"/><rect x="0" y="79" width="90" height="2" fill="${A}"/>`,
+  "04": `${[0,1,2].map(i=>`<rect x="${i%2?6:0}" y="${i*54}" width="84" height="52" fill="${D}" opacity="${.5+i*.2}"/><rect x="${(i%2?6:0)+30}" y="${i*54+14}" width="24" height="24" fill="none" stroke="${S}" stroke-width="1.2"/>`).join('')}<path d="M80 26 h8 m-3 -3 l3 3 l-3 3" stroke="${A}" stroke-width="1.2" fill="none"/>`,
+  "05": `${Array.from({length:14},(_,i)=>{const a=i/14*Math.PI*2;return `<line x1="${45+Math.cos(a)*18}" y1="${80+Math.sin(a)*18}" x2="${45+Math.cos(a)*60}" y2="${80+Math.sin(a)*60}" stroke="${D}" stroke-width="2"/>`}).join('')}<rect x="25" y="55" width="40" height="50" fill="none" stroke="${S}" stroke-width="1.5"/><rect x="29" y="59" width="40" height="50" fill="none" stroke="${A}" stroke-width="1.2" opacity=".8"/>`,
+  "06": `${[0,1,2,3,4].map(i=>`<rect x="${8+i*8}" y="${14+i*14}" width="${74-i*16}" height="${132-i*28}" fill="none" stroke="${i==4?A:S}" stroke-width="${i==4?2:1}" opacity="${.3+i*.17}"/>`).join('')}<path d="M45 4 v10" stroke="${A}" stroke-width="1.2"/>`,
+  "07": `<rect x="0" y="0" width="52" height="160" fill="${D}" opacity=".5"/><rect x="52" y="0" width="38" height="160" fill="${D}"/><path d="M8 120 h36 v-40 l-18 -14 l-18 14z" fill="none" stroke="${S}" stroke-width="1" opacity=".5" stroke-dasharray="2 2"/><path d="M56 120 h30 v-40 l-15 -14" fill="none" stroke="${S}" stroke-width="1.4"/><rect x="51" y="0" width="2.5" height="160" fill="${S}"/><circle cx="52" cy="80" r="6" fill="${S}"/><path d="M49.5 80 l-1.5 0 m6 0 l1.5 0" stroke="${A}" stroke-width="1.5"/><text x="6" y="16" font-family="IBM Plex Mono" font-size="7" fill="${S}">ANTES</text><text x="58" y="16" font-family="IBM Plex Mono" font-size="7" fill="${A}">DEPOIS</text>`,
+  "08": `<path d="M0 100 L25 70 L45 88 L70 60 L90 80 V160 H0z" fill="${D}" opacity=".45"/><rect x="18" y="86" width="52" height="56" fill="${D}" opacity=".8"/><rect x="26" y="98" width="14" height="14" fill="${A}" opacity=".7"/><rect x="48" y="98" width="14" height="14" fill="${A}" opacity=".7"/><rect x="0" y="138" width="90" height="22" fill="${D}"/><path d="M10 32 h14 m-3 -3 l3 3 l-3 3" stroke="${S}" stroke-width="1" fill="none" opacity=".5"/><path d="M10 46 h26 m-3 -3 l3 3 l-3 3" stroke="${A}" stroke-width="1.3" fill="none"/><text x="40" y="35" font-family="IBM Plex Mono" font-size="6.5" fill="${S}" opacity=".6">fundo</text><text x="40" y="49" font-family="IBM Plex Mono" font-size="6.5" fill="${A}">frente</text>`,
+  "09": `${face(45,48,14)}<rect x="22" y="22" width="46" height="58" fill="none" stroke="${A}" stroke-width="1.2" stroke-dasharray="3 2"/><g>${[[6,10],[17,6],[24,14],[39,8],[48,5],[54,12],[67,9],[77,7]].map(([x,w],i)=>`<rect x="${x}" y="128" width="${w-1}" height="10" fill="${i%3==1?A:S}" opacity="${i%3==1?1:.6}"/>`).join('')}</g><text x="6" y="150" font-family="IBM Plex Mono" font-size="6.5" fill="${S}" opacity=".7">cortes · punch-in</text>`,
+  "10": `${["rosto","PiP","B-roll","cartela"].map((t,i)=>`<rect x="8" y="${8+i*37}" width="74" height="32" rx="3" fill="${D}" opacity="${.5+i*.12}"/><text x="14" y="${28+i*37}" font-family="IBM Plex Mono" font-size="8" fill="${i==1?A:S}">${t}</text>`).join('')}<rect x="58" y="${8+37+14}" width="18" height="14" rx="2" fill="${A}"/>`
+};
+const cats = ["Todas", ...new Set(REFS.map(r=>r.categoria))];
+let cur = "Todas";
+try { const s = localStorage.getItem('radar-cat'); if (s && cats.includes(s)) cur = s; } catch(e){}
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function render(){
+  document.getElementById('filters').innerHTML = cats.map(c=>`<button type="button" aria-pressed="${c===cur}" data-c="${esc(c)}">${esc(c)}</button>`).join('');
+  const list = REFS.filter(r=>cur==="Todas"||r.categoria===cur);
+  document.getElementById('count').textContent = REFS.length;
+  document.getElementById('grid').innerHTML = list.map(r=>{
+    const n = r.id.slice(-2);
+    return `<article class="card">
+      <div><div class="prev" role="img" aria-label="Diagrama esquemático: ${esc(r.tecnica)}"><svg viewBox="0 0 90 160" preserveAspectRatio="xMidYMid slice">${PREV[n]||''}</svg><span class="tag">ESQUEMA · ${n}</span></div></div>
+      <div>
+        <div class="top"><span class="chip">${esc(r.categoria)}</span><span class="lvl">${esc(r.dificuldade)}</span></div>
+        <h3>${esc(r.tecnica)}</h3>
+        <div class="src"><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.titulo)}</a> · ${esc(r.plataforma)}</div>
+        <dl>
+          <dt>Observado</dt><dd>${esc(r.observado)}</dd>
+          <dt>Aplicação no Graviton</dt><dd>${esc(r.uso_graviton)}</dd>
+        </dl>
+        <details><summary>Análise completa</summary><dl>
+          <dt>Descrição visual</dt><dd>${esc(r.descricao_visual)}</dd>
+          <dt>Hipótese técnica</dt><dd class="hyp">${esc(r.hipotese)}</dd>
+          <dt>Como reproduzir</dt><dd>${esc(r.como_reproduzir)}</dd>
+          <dt>Momento no vídeo</dt><dd>${esc(r.momento)}</dd>
+          <dt>Criador</dt><dd>${esc(r.criador)}</dd>
+          <dt>Nichos</dt><dd>${esc(r.nichos.join(' · '))}</dd>
+          <dt>Status</dt><dd>${esc(r.status_implementacao)}</dd>
+        </dl></details>
+      </div></article>`;
+  }).join('');
+}
+document.getElementById('filters').addEventListener('click', e=>{
+  const b = e.target.closest('button'); if(!b) return;
+  cur = b.dataset.c; try{localStorage.setItem('radar-cat',cur)}catch(e){} render();
+});
+render();
+</script>
